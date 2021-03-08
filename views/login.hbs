@@ -9,23 +9,26 @@
             <h1>Login <b style="color: #FFC107;">VTV</b></h1>
             <h2>Ingrese los siguientes datos:</h2>
             <hr>
+            <form action="">
             <h3>Usuario:</h3>
-            <div class="input-group mb-3">
+                <div class="input-group mb-3">
                 <div class="input-group-prepend">
                 </div>
-                <input type="text" class="form-control" placeholder="Ingrese el usuario" aria-label="Username" aria-describedby="basic-addon1">
+                <input  type="text" id="txtUsuario" class="form-control" placeholder="Ingrese el usuario" aria-label="Username" aria-describedby="basic-addon1">
             </div>
             <br>
             <h3>Contraseña:</h3>
             <div class="input-group mb-3">
                 <div class="input-group-prepend">
                 </div>
-                <input type="text" class="form-control" placeholder="Ingrese la contraseña" aria-label="Username" aria-describedby="basic-addon1">
-            </div>
+                <input type="password" id="txtContraseña" class="form-control" placeholder="Ingrese la contraseña" aria-label="Contraseña" aria-describedby="basic-addon1">
+            </div>                
+            </form>
             <hr>
-            <a href="#about" class="btn-get-started scrollto">Boton</a>
+            <a id="btnLogin" class="btn-get-started scrollto">Ingresar</a>
             <br>
             <br>
+            <p id="msg" ></p>
             <h4>No tienes cuenta? </h4><a href="#" class="badge badge-warning">Registrarse</a> 
         </div>
     </section>
@@ -41,6 +44,7 @@
     <script src="assets/vendor/owl.carousel/owl.carousel.min.js"></script>
     <script src="assets/vendor/isotope-layout/isotope.pkgd.min.js"></script>
     <script src="assets/vendor/venobox/venobox.min.js"></script>
+    <script src="assets/js/index.js"></script>
 
     <!-- Template Main JS File -->
     <script src="assets/js/main.js"></script>

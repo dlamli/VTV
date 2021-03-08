@@ -1432,6 +1432,11 @@ section {
     animation: animate-loading 1s linear infinite;
 }
 
+#txtUsuario,
+#txtContraseña {
+    font-size: 25px;
+}
+
 .contact .php-email-form input,
 .contact .php-email-form textarea {
     border-radius: 4px;
