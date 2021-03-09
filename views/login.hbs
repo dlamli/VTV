@@ -1,36 +1,50 @@
 <!DOCTYPE html>
 <html lang="en">
 {{> head}}
-<body>
+<body class="body">
     {{> header}}
-
+    
     <section id="login" class="d-flex align-items-center justify-content-center">
         <div class="container position-relative">
             <h1>Login <b style="color: #FFC107;">VTV</b></h1>
-            <h2>Ingrese los siguientes datos:</h2>
-            <hr>
-            <form action="">
-            <h3>Usuario:</h3>
-                <div class="input-group mb-3">
-                <div class="input-group-prepend">
-                </div>
-                <input  type="text" id="txtUsuario" class="form-control" placeholder="Ingrese el usuario" aria-label="Username" aria-describedby="basic-addon1">
-            </div>
-            <br>
-            <h3>Contraseña:</h3>
-            <div class="input-group mb-3">
-                <div class="input-group-prepend">
-                </div>
-                <input type="password" id="txtContraseña" class="form-control" placeholder="Ingrese la contraseña" aria-label="Contraseña" aria-describedby="basic-addon1">
-            </div>                
-            </form>
-            <hr>
-            <a id="btnLogin" class="btn-get-started scrollto">Ingresar</a>
-            <br>
-            <br>
-            <p id="msg" ></p>
-            <h4>No tienes cuenta? </h4><a href="#" class="badge badge-warning">Registrarse</a> 
+        <div class="contenedor-form">
+        <div class="toggle">
+            <span> Crear Cuenta</span>
         </div>
+
+        <div class="formulario" >
+            <h2>Iniciar Sesión</h2>
+            <br>
+            <form id="formLogin" >
+                <input id="txtUsuario" type="text" placeholder="Usuario" required>
+                <input id="txtContraseña" type="password" placeholder="Contraseña" required>
+                {{!-- <input id="btnLogin" type="submit" value="Iniciar Sesión"> --}}
+                <a id="btnLogin" class="btn btn-warning" type="submit" >Iniciar Sesión</a>
+                <br>
+                <p id="msg" class="text-warning"></p>
+            </form>
+
+
+        </div>
+
+        <div class="formulario">
+            <h2>Crea tu Cuenta</h2>
+            <form action="#">
+                <input type="text" placeholder="Usuario" required>
+
+                <input type="password" placeholder="Contraseña" required>
+
+                <input type="email" placeholder="Correo Electronico" required>
+
+                <input type="text" placeholder="Teléfono" required>
+
+                <input type="submit" value="Registrarse">
+            </form>
+        </div>
+        <div class="reset-password">
+            <a href="#">Olvide mi Contraseña?</a>
+        </div>
+    </div>
     </section>
     
     
@@ -45,8 +59,10 @@
     <script src="assets/vendor/isotope-layout/isotope.pkgd.min.js"></script>
     <script src="assets/vendor/venobox/venobox.min.js"></script>
     <script src="assets/js/index.js"></script>
+    <script src="assets/js/jquery-3.1.1.min.js"></script>
+    <script src="assets/js/main_login.js"></script>
 
     <!-- Template Main JS File -->
-    <script src="assets/js/main.js"></script>
+    {{!-- <script src="assets/js/main.js"></script> --}}
 </body>
 </html>

@@ -1,6 +1,7 @@
 const btnLogin = document.getElementById('btnLogin'),
     txtUsuario = document.getElementById('txtUsuario'),
     txtContraseña = document.getElementById('txtContraseña'),
+    formLogin = document.getElementById('formLogin'),
     msg = document.getElementById('msg');
 
 

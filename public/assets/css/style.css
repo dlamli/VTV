@@ -432,14 +432,14 @@ h6 {
 #login {
     width: 100%;
     height: 80vh;
-    background: url("../img/login-fondo.jpg") top center;
+    /* background: url("../img/login-fondo.jpg") top center; */
     background-size: cover;
     position: relative;
 }
 
 #login:before {
     content: "";
-    background: rgba(45, 53, 69, 0.7);
+    /* background: rgba(45, 53, 69, 0.7); */
     position: absolute;
     bottom: 0;
     top: 0;
@@ -1430,11 +1430,6 @@ section {
     border-top-color: #eee;
     -webkit-animation: animate-loading 1s linear infinite;
     animation: animate-loading 1s linear infinite;
-}
-
-#txtUsuario,
-#txtContraseña {
-    font-size: 25px;
 }
 
 .contact .php-email-form input,

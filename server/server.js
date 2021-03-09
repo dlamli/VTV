@@ -8,11 +8,13 @@ const app = express();
 
 //Habilitar la carpeta public 
 app.use(express.static(path.resolve(__dirname, '../public')));
+
 //Habilitar la carpeta parcials HBS
 hbs.registerPartials(path.resolve(__dirname, '../views/parcials'));
 
 app.set('view engine', 'hbs');
 
+//Path
 app.get('/', (req, res) => {
 
     res.render('index', {});
@@ -59,8 +61,7 @@ app.get('/usuario_index', (req, res) => {
 
 });
 
-
-
+//Puerto
 app.listen(process.env.PORT, (err) => {
     if (err) console.log(err);
 
