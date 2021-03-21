@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Formulario Vehiculos</title>
+    <link rel="stylesheet" href="../css/estilos.css">
+</head>
+
+<body>
+    <div class="regform">
+        <h1>Formulario de Registro</h1>
+    </div>
+    <div class="main">
+        <form>
+            <div id="name">
+                <h2 class="name">Modelo</h2>
+                <select class="optionModel" name="subject">
+                    <option desabled="disabled" selected="selected">Modelo</option>
+                    <option>Aston Martin</option>
+                    <option>Audi</option>
+                    <option>Bentley</option>
+                    <option>Mitsubishi</option>
+                </select>
+                <select class="optionModelYear" name="subject">
+                    <option desabled="disabled" selected="selected">Año</option>
+                    <option>2021</option>
+                    <option>2020</option>
+                    <option>2019</option>
+                    <option>2018</option>
+                </select>
+            </div>
+            </select>
+            <h2 class="nameCilindraje">Cilindraje</h2>
+            <select class="optionCilindraje" name="subject">
+                <option desabled="disabled" selected="selected">Cilindraje</option>
+                <option>5.000</option>
+                <option>3.500</option>
+                <option>3.000</option>
+            </select>
+            <h2 class="nameRightSide">Color</h2>
+            <select class="optionColor" name="subject">
+                <option desabled="disabled" selected="selected">Color</option>
+                <option>Blanco</option>
+                <option>Negro</option>
+                <option>Rojo</option>
+            </select>
+            <h2 class="namePassangers">Cantidad de Pasageros</h2>
+            <select class="optionPassagers" name="subject">
+                <option desabled="disabled" selected="selected"></option>
+                <option>2</option>
+                <option>4</option>
+                <option>5</option>
+                <option>7</option>
+            </select>
+            <h2 class="nameKilometraje">Kilometraje</h2>
+            <input class="codeKilometraje" type="text" name="area_code"><br>
+            <textarea name="extras" class="extras" rows="10" cols="40">Escribe aqui los Extras</textarea>
+
+            <div class="content">
+                <div class="box">
+                    <input type="file" name="file-1[]" id="file-1" class="inputfile inputfile-1"
+                        data-multiple-caption="{count} files selected" multiple />
+                           
+                </div>
+            </div>
+            <button type="submit">Enviar</button>
+        </form>
+    </div>
+</body>
+
+</html>
