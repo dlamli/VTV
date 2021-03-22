@@ -5,7 +5,7 @@ const { Router } = require('express'),
 router.get('/admin_index', (req, res) => {
 
     res.render('admin_index.hbs', {
-        admin: 'Admin'
+        rol: 'Admin'
     });
 
 });
