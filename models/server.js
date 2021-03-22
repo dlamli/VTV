@@ -2,14 +2,22 @@
 const express = require('express'),
     hbs = require('hbs'),
     cors = require('cors'),
+    mongoose = require('mongoose'),
+    bodyParser = require('body-parser'),
     path = require('path');
 
+const userGet = require('../routes/usuario.routes'),
+    adminGet = require('../routes/admin.routes');
 
 class Server {
 
     constructor() {
         this.app = express();
         this.port = process.env.PORT;
+        this.mongoURL = process.env.DB_CONNECTION;
+
+        //Database
+        this.connectDB();
 
         //Middlewares
         this.middlewares();
@@ -19,8 +27,22 @@ class Server {
 
     };
 
-    middlewares() {
+    connectDB() {
+        console.log('Estableciendo conexion a la base de datos...');
+        mongoose.connect(this.mongoURL, {
+            useNewUrlParser: true,
+            useUnifiedTopology: true,
+            useFindAndModify: false,
+            useCreateIndex: true
+        }, () => {
+            console.log(`Conectado a la base de datos Mongo ${this.mongoURL}`);
+        });
+    }
 
+    middlewares() {
+        // Bodyparser
+        this.app.use(bodyParser.json());
+        // Cors
         this.app.use(cors());
         //Habilitar la carpeta parcials HBS
         hbs.registerPartials(path.resolve(__dirname, '../views/parcials'));
@@ -32,52 +54,9 @@ class Server {
     };
 
     routes() {
-        //GET
-        this.app.get('/', (req, res) => {
 
-            res.render('index', {});
-
-        });
-
-        this.app.get('/login', (req, res) => {
-
-            res.render('login', {});
-
-        });
-
-        this.app.get('/portfolio-details', (req, res) => {
-
-            res.render('portfolio-details', {});
-
-        });
-
-        this.app.get('/admin_index', (req, res) => {
-
-            res.render('admin_index.hbs', {
-                admin: 'Admin'
-            });
-
-        });
-
-        this.app.get('/usuario_lista', (req, res) => {
-
-            res.render('usuario_lista', {});
-
-        });
-
-        this.app.get('/subasta_lista', (req, res) => {
-
-            res.render('subasta_lista', {});
-
-        });
-
-        this.app.get('/usuario_index', (req, res) => {
-
-            res.render('usuario_index.hbs', {
-
-            });
-
-        });
+        this.app.use('/', userGet);
+        this.app.use('/', adminGet);
 
     };
 
@@ -86,7 +65,7 @@ class Server {
         this.app.listen(this.port, (err) => {
             if (err) console.log(err);
 
-            console.log(`Listening server http://localhost:${process.env.PORT}`);
+            console.log(`Escuchando el puerto del servidor http://localhost:${this.port}`);
         });
 
     };

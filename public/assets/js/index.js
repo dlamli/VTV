@@ -4,8 +4,6 @@ const btnLogin = document.getElementById('btnLogin'),
     formLogin = document.getElementById('formLogin'),
     msg = document.getElementById('msg');
 
-
-
 btnLogin.addEventListener('click', () => {
 
     if (txtUsuario.value === 'admin' && txtContraseña.value === 'admin') {
