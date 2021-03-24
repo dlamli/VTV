@@ -17,11 +17,6 @@ Opcion#2(Nodemon)
 ```
 npm run nodemon
 ```
-## Librerías usadas:
-```
--Express
--Handlebars
-```
 
 ## License
 [ISC](https://choosealicense.com/licenses/isc/)

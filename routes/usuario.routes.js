@@ -1,35 +1,87 @@
 const { Router } = require('express'),
     Usuario = require('../models/usuario'),
+    tipoUsuario = require('../models/tipoUsuario'),
     router = Router();
 
 //GET
+// Index
 router.get('/', async(req, res) => {
 
-    res.render('index', {});
-
-    // try {
-    //     const usuarios = await Usuario.find();
-    //     res.json(usuarios);
-    // } catch (error) {
-    //     res.json({
-    //         error
-    //     });
-    // }
+    try {
+        const usuario = await Usuario.find();
+        res.render('index', {});
+        // res.json(usuario);
+    } catch (error) {
+        res.json({
+            error
+        });
+    }
 
 });
 
-// // Submit a Usuario
+// Login
+router.get('/login', (req, res) => {
+    res.render('login', {});
+
+});
+
+// Detalles Vehiculo
+router.get('/detalles', (req, res) => {
+
+    res.render('detalles-vehiculo', {});
+
+});
+
+// Index del usuario
+router.get('/usuario_index', (req, res) => {
+
+    res.render('usuario_index.hbs', {
+
+    });
+
+});
+
+
+// Insercion de usuario
+router.post('/', async(req, res) => {
+    let nombreUsuario = req.body.nombre;
+    const post = new Usuario({
+        nombre: req.body.nombre,
+        apellido_paterno: req.body.apellido_paterno,
+        apellido_materno: req.body.apellido_materno,
+        telefono: req.body.telefono,
+        cedula: req.body.cedula,
+        nacionalidad: req.body.nacionalidad,
+        clave: req.body.clave,
+        correo_electronico: req.body.correo_electronico,
+        tipoUsuario: req.body.tipoUsuario,
+    });
+
+    try {
+        Usuario.findOne({ nombre: nombreUsuario }, async(err, result) => {
+            if (err) console.log(err);
+            if (result) {
+                console.log("Este nombre ya existe");
+                res.json({
+                    msg: "El nombre ya se encuentra"
+                })
+            } else {
+                const saveInfo = await post.save();
+                res.json(saveInfo);
+            }
+        });
+    } catch (error) {
+        res.json({
+            error
+        });
+    }
+});
+
+// Insercion de roles
 // router.post('/', async(req, res) => {
-//     const post = new Usuario({
-//         nombre: req.body.nombre,
-//         apellido_paterno: req.body.apellido_paterno,
-//         apellido_materno: req.body.apellido_materno,
-//         telefono: req.body.telefono,
-//         cedula: req.body.cedula,
-//         nacionalidad: req.body.nacionalidad,
-//         clave: req.body.clave,
-//         correo_electronico: req.body.correo_electronico,
-//         tipoUsuario: req.body.tipoUsuario,
+//     const post = new tipoUsuario({
+//         id: req.body._id,
+//         rol: req.body.rol
 //     });
 
 //     try {
@@ -87,24 +139,5 @@ router.get('/', async(req, res) => {
 //         });
 //     }
 // });
-
-router.get('/login', (req, res) => {
-    res.render('login', {});
-
-});
-
-router.get('/detalles', (req, res) => {
-
-    res.render('detalles-vehiculo', {});
-
-});
-
-router.get('/usuario_index', (req, res) => {
-
-    res.render('usuario_index.hbs', {
-
-    });
-
-});
 
 module.exports = router;

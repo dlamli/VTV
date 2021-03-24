@@ -40,6 +40,10 @@ const esquema = mongoose.Schema({
     fecha_creacion: {
         type: Date,
         default: Date.now
+    },
+    tipoUsuario: {
+        type: Number,
+        default: 0
     }
 });
 

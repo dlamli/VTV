@@ -1,9 +1,3 @@
-/**
- * Template Name: Baker - v2.2.1
- * Template URL: https://bootstrapmade.com/baker-free-onepage-bootstrap-theme/
- * Author: BootstrapMade.com
- * License: https://bootstrapmade.com/license/
- */
 !(function($) {
     "use strict";
 

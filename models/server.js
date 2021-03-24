@@ -37,7 +37,7 @@ class Server {
         }, () => {
             console.log(`Conectado a la base de datos Mongo ${this.mongoURL}`);
         });
-    }
+    };
 
     middlewares() {
         // Bodyparser
@@ -48,20 +48,21 @@ class Server {
         hbs.registerPartials(path.resolve(__dirname, '../views/parcials'));
         //Habilitar la carpeta public 
         this.app.use(express.static(path.resolve(__dirname, '../public')));
-
+        //HBS
         this.app.set('view engine', 'hbs');
 
     };
 
     routes() {
-
+        // Usuario
         this.app.use('/', userGet);
+        // Admin
         this.app.use('/', adminGet);
 
     };
 
     start() {
-
+        // Inicio del servidor
         this.app.listen(this.port, (err) => {
             if (err) console.log(err);
 
