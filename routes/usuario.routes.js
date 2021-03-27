@@ -1,143 +1,116 @@
-const { Router } = require('express'),
-    Usuario = require('../models/usuario'),
-    tipoUsuario = require('../models/tipoUsuario'),
-    router = Router();
+const { Router } = require("express"),
+  bcrypt = require('bcrypt'),
+  router = Router();
 
-//GET
+const e = require("express");
+const Usuario = require("../models/usuario");
+
+// GET
+
 // Index
-router.get('/', async(req, res) => {
+router.get("/", (req, res) => {
+  try {
+    res.render("index", {});
 
-    try {
-        const usuario = await Usuario.find();
-        res.render('index', {});
-        // res.json(usuario);
-    } catch (error) {
-        res.json({
-            error
-        });
-    }
-
+  } catch (error) {
+    res.json({
+      error
+    });
+  }
 });
 
 // Login
-router.get('/login', (req, res) => {
-    res.render('login', {});
+router.get("/login", async (req, res) => {
+  try {
+    res.render("login", {});
+  } catch (error) {
+    res.json({
+      error
+    })
+  }
+});
 
+// Ventas
+router.get("/registroVenta", (req, res) => {
+  res.render("ventaForm", {});
 });
 
 // Detalles Vehiculo
-router.get('/detalles', (req, res) => {
-
-    res.render('detalles-vehiculo', {});
-
+router.get("/detalles", (req, res) => {
+  res.render("detalles-vehiculo", {});
 });
 
 // Index del usuario
-router.get('/usuario_index', (req, res) => {
+router.get("/usuario_index", (req, res) => {
+  res.render("usuario_index.hbs", {});
 
-    res.render('usuario_index.hbs', {
-
-    });
 
 });
 
+// POST
 
 // Insercion de usuario
-router.post('/', async(req, res) => {
-    let nombreUsuario = req.body.nombre;
+router.post("/registrar", async (req, res) => {
+  try {
+    let { clave, email } = req.body;
+
     const post = new Usuario({
-        nombre: req.body.nombre,
-        apellido_paterno: req.body.apellido_paterno,
-        apellido_materno: req.body.apellido_materno,
-        telefono: req.body.telefono,
-        cedula: req.body.cedula,
-        nacionalidad: req.body.nacionalidad,
-        clave: req.body.clave,
-        correo_electronico: req.body.correo_electronico,
-        tipoUsuario: req.body.tipoUsuario,
+      nombre: req.body.nombre,
+      apellido_paterno: req.body.apellidoP,
+      apellido_materno: req.body.apellidoM,
+      telefono: req.body.tel,
+      cedula: req.body.cedula,
+      nacionalidad: req.body.country,
+      clave: bcrypt.hashSync(clave, 10),
+      correo_electronico: req.body.email
     });
 
-    try {
-        Usuario.findOne({ nombre: nombreUsuario }, async(err, result) => {
-            if (err) console.log(err);
-            if (result) {
-                console.log("Este nombre ya existe");
-                res.json({
-                    msg: "El nombre ya se encuentra"
-                })
-            } else {
-                const saveInfo = await post.save();
-                res.json(saveInfo);
-            }
-        });
-    } catch (error) {
-        res.json({
-            error
-        });
-    }
+
+    await Usuario.findOne({ correo_electronico: email }, async (err, result) => {
+      if (err) { console.log(err); }
+
+      else if (result) { res.json({ msg: "Ya existe el correo electrónico " }); }
+
+      else {
+        const saveInfo = await post.save();
+        res.json(saveInfo);
+      }
+
+    });
+
+  } catch (error) {
+    res.json({ error });
+  }
 });
 
-// Insercion de roles
-// router.post('/', async(req, res) => {
-//     const post = new tipoUsuario({
-//         id: req.body._id,
-//         rol: req.body.rol
-//     });
+// Login
+router.post("/login", async (req, res) => {
+  try {
+    let { usuario, pass } = req.body;
+    const $usuario = await Usuario.findOne({ nombre: usuario }),
+      validarClave = await bcrypt.compare(pass, $usuario.clave);
 
-//     try {
-//         const saveInfo = await post.save();
-//         res.json(saveInfo);
-//     } catch (error) {
-//         res.json({
-//             error
-//         });
-//     }
-// });
+    if ($usuario) {
+      if (validarClave) {
+        // res.json({
+        //   msg: "Las claves coinciden",
+        //   $usuario
+        // });
+        res.redirect('/usuario_index');
+      }
 
-// // Consigue el usuario por id
-// router.get('/:id', async(req, res) => {
-//     try {
-//         const getUsuarioId = await Usuario.findById(req.params.id);
-//         res.json({
-//             msg: 'Usuario insertado',
-//             getUsuarioId
-//         });
-//     } catch (error) {
-//         res.json({
-//             msg: error
-//         });
-//     }
+      else { res.json({ msg: "Las claves es inválida" }); }
 
-// });
+    }
 
-// // Delete Usuario
-// router.delete('/:id', async(req, res) => {
-//     try {
-//         const deleteUsuario = await Usuario.remove({ _id: req.params.id });
-//         res.json({
-//             msg: 'Usuario eliminado',
-//             deleteUsuario
-//         });
-//     } catch (error) {
-//         res.json({
-//             msg: error
-//         });
-//     }
-// });
+    else { res.json({ msg: "Usuario no existe en la base de datos" }); }
 
-// // Update Usuario
-// router.patch('/:id', async(req, res) => {
-//     try {
-//         const updateUsuario = await Usuario.updateOne({ _id: req.params.id }, { $set: { nombre: req.body.nombre } });
-//         res.json({
-//             msg: 'Usuario actualizado',
-//             updateUsuario
-//         });
-//     } catch (error) {
-//         res.json({
-//             msg: error
-//         });
-//     }
-// });
+  } catch (error) {
+    res.json({
+      msg: "Usuario no existe en la base de datos"
+    });
+  }
+
+});
 
 module.exports = router;

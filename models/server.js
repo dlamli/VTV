@@ -1,78 +1,76 @@
 //Importación de librerias
-const express = require('express'),
-    hbs = require('hbs'),
-    cors = require('cors'),
-    mongoose = require('mongoose'),
-    bodyParser = require('body-parser'),
-    path = require('path');
+const express = require("express"),
+  hbs = require("hbs"),
+  cors = require("cors"),
+  mongoose = require("mongoose"),
+  bodyParser = require("body-parser"),
+  path = require("path");
 
-const userGet = require('../routes/usuario.routes'),
-    adminGet = require('../routes/admin.routes');
+const usuarioRoutes = require("../routes/usuario.routes"),
+  adminRoutes = require("../routes/admin.routes");
 
 class Server {
 
-    constructor() {
-        this.app = express();
-        this.port = process.env.PORT;
-        this.mongoURL = process.env.DB_CONNECTION;
+  constructor() {
+    this.app = express();
+    this.port = process.env.PORT;
+    this.mongoURL = process.env.DB_CONNECTION;
 
-        //Database
-        this.connectDB();
+    //Database
+    this.connectDB();
 
-        //Middlewares
-        this.middlewares();
+    //Middlewares
+    this.middlewares();
 
-        //Routes
-        this.routes();
+    //Routes
+    this.routes();
+  }
 
-    };
+  connectDB() {
+    console.log("Estableciendo conexion a la base de datos...");
+    mongoose.connect(
+      this.mongoURL,
+      {
+        useNewUrlParser: true,
+        useUnifiedTopology: true,
+        useFindAndModify: false,
+        useCreateIndex: true,
+      })
+      .then(console.log('Conectado en la base de datos'))
+      .catch((err) => console.log(err));
+  }
 
-    connectDB() {
-        console.log('Estableciendo conexion a la base de datos...');
-        mongoose.connect(this.mongoURL, {
-            useNewUrlParser: true,
-            useUnifiedTopology: true,
-            useFindAndModify: false,
-            useCreateIndex: true
-        }, () => {
-            console.log(`Conectado a la base de datos Mongo ${this.mongoURL}`);
-        });
-    };
+  middlewares() {
+    // Cors
+    this.app.use(cors());
+    // Bodyparser
+    this.app.use(bodyParser.json());
+    // form-urlencoded
+    this.app.use(bodyParser.urlencoded({ extended: false }));
+    //Habilitar la carpeta parcials HBS
+    hbs.registerPartials(path.resolve(__dirname, "../views/parcials"));
+    //Habilitar la carpeta public
+    this.app.use(express.static(path.resolve(__dirname, "../public")));
+    //HBS
+    this.app.set("view engine", "hbs");
+  }
 
-    middlewares() {
-        // Bodyparser
-        this.app.use(bodyParser.json());
-        // Cors
-        this.app.use(cors());
-        //Habilitar la carpeta parcials HBS
-        hbs.registerPartials(path.resolve(__dirname, '../views/parcials'));
-        //Habilitar la carpeta public 
-        this.app.use(express.static(path.resolve(__dirname, '../public')));
-        //HBS
-        this.app.set('view engine', 'hbs');
+  routes() {
+    // Usuario
+    this.app.use("/", usuarioRoutes);
+    // Admin
+    this.app.use("/", adminRoutes);
+  }
 
-    };
-
-    routes() {
-        // Usuario
-        this.app.use('/', userGet);
-        // Admin
-        this.app.use('/', adminGet);
-
-    };
-
-    start() {
-        // Inicio del servidor
-        this.app.listen(this.port, (err) => {
-            if (err) console.log(err);
-
-            console.log(`Escuchando el puerto del servidor http://localhost:${this.port}`);
-        });
-
-    };
-
-
-};
-
+  start() {
+    // Inicio del servidor
+    this.app.listen(this.port, (err) => {
+      if (err) console.log(err);
+      console.log(
+        `Escuchando el puerto del servidor http://localhost:${this.port}`
+      );
+    });
+  }
+}
 
 module.exports = Server;

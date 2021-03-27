@@ -24,6 +24,11 @@ a:hover {
     text-decoration: none;
 }
 
+#nacionalidad {
+    color: #ffc107;
+    margin-right: 160px;
+}
+
 h1,
 h2,
 h3,
