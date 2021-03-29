@@ -1,11 +1,28 @@
 const { Router } = require("express"),
   express = require('express'),
   bcrypt = require('bcrypt'),
+  nodemailer = require('nodemailer'),
   router = Router();
 
 const Usuario = require("../models/usuario");
 
 const app = express();
+
+// Validacion de correo
+let transporter = nodemailer.createTransport({
+  service: 'gmail',
+  auth: {
+    user: 'pruebaconfirma@gmail.com',
+    pass: 'confirma123'
+  }
+});
+
+let mailOptions = {
+  from: 'pruebaconfirma@gmail.com',
+  to: 'sebasq13@outlook.com',
+  subject: 'Prueba',
+  text: 'Correo'
+};
 
 // GET
 
@@ -52,6 +69,7 @@ router.get("/usuario_index", (req, res) => {
 router.get("/verCuenta", async (req, res) => {
   res.render('verCuenta');
 })
+
 // POST
 
 // Insercion de usuario
@@ -80,6 +98,15 @@ router.post("/registrar", async (req, res) => {
       else {
         const saveInfo = await post.save();
         res.json(saveInfo);
+
+        transporter.sendMail(mailOptions, function (error, info) {
+          if (error) {
+            console.log(error);
+          } else {
+            console.log('Email sent: ' + info.response);
+          }
+        });
+
       }
 
     });
