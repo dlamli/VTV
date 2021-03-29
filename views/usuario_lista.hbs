@@ -30,39 +30,23 @@
           </tr>
         </thead>
         <tbody>
+          {{# each usuarioDB}}
+
           <tr>
-            <th scope="row">6051211f657d35912d938d0d</th>
-            <td>Mark</td>
-            <td>Otto</td>
-            <td>Gutenberg</td>
-            <td>12345678</td>
-            <td>178956482</td>
-            <td>CR</td>
-            <td>markotto@gmail.com</td>
-            <td>02/02/2020</td>
+            <th scope="row">{{ this._id }}</th>
+            <td>{{this.nombre}}</td>
+            <td>{{this.apellido_paterno}}</td>
+            <td>{{this.apellido_materno}}</td>
+            <td>{{this.telefono}}</td>
+            <td>{{this.cedula}}</td>
+            <td>{{this.nacionalidad}}</td>
+            <td>{{this.correo_electronico}}</td>
+            <td>{{this.fecha_creacion}}</td>
           </tr>
-          <tr>
-            <th scope="row">2</th>
-            <td>Ana</td>
-            <td>Marín</td>
-            <td>Perez</td>
-            <td>12345678</td>
-            <td>895472361</td>
-            <td>USA</td>
-            <td>anamarin@gmail.com</td>
-            <td>02/08/2020</td>
-          </tr>
-          <tr>
-            <th scope="row">3</th>
-            <td>Marie</td>
-            <td>Gaston</td>
-            <td>Ortiz</td>
-            <td>12345678</td>
-            <td>11236975</td>
-            <td>CR</td>
-            <td>mariegaston@gmail.com</td>
-            <td>02/05/2020</td>
-          </tr>
+
+          {{/each}}
+
+
         </tbody>
       </table>
     </div>

@@ -20,7 +20,7 @@ const esquema = mongoose.Schema({
     required: true,
   },
   cedula: {
-    type: String,
+    type: Number,
     required: true,
   },
   nacionalidad: {
@@ -34,10 +34,6 @@ const esquema = mongoose.Schema({
   correo_electronico: {
     type: String,
     unique: true,
-    required: true,
-  },
-  tipoUsuario: {
-    type: String,
     required: true,
   },
   fecha_creacion: {

@@ -17,7 +17,7 @@
                     <li><a href="/registroVenta">Ventas</a></li>
                     <li class="drop-down"><a href="">Cuenta Usuario</a>
                         <ul>
-                            <li><a href="#">Ver Cuenta</a></li>
+                            <li><a href="/verCuenta">Ver Cuenta</a></li>
                             <!-- <li class="drop-down"><a href="#">Deep Drop Down</a>
                                 <ul>
                                     <li><a href="#">Deep Drop Down 1</a></li>
@@ -36,7 +36,12 @@
         </div>
     </header>
 
-    {{> section}}
+    <section id="hero" class="d-flex align-items-center justify-content-center">
+        <div class="container position-relative">
+
+            <h1>Bienvenido <b id="tituloUsuario">{{usuario.nombre}}</b></h1>
+        </div>
+    </section>
 
     <main id="main">
 

@@ -2,6 +2,7 @@ const { Router } = require("express"),
   bodyParser = require("body-parser"),
   router = Router();
 
+const { db } = require("../models/tipoUsuario");
 const tipoUsuario = require("../models/tipoUsuario"),
   Usuario = require("../models/usuario");
 
@@ -15,12 +16,19 @@ router.get("/admin_index", (req, res) => {
 });
 
 router.get("/usuario_lista", async (req, res) => {
-  res.render("usuario_lista", {});
-  let lista_usuario = await Usuario.find();
+  await Usuario.find({tipoUsuario: 0}, (err, dato) => {
+    if (err) { res.json(err) }
+    else {
+      res.render("usuario_lista", { usuarioDB: dato });
+    }
+
+
+  });
   // res.json({
   //   lista_usuario
   // })
 });
+
 
 router.get("/subasta_lista", (req, res) => {
   res.render("subasta_lista", {});

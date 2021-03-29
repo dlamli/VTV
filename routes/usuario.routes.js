@@ -1,9 +1,11 @@
 const { Router } = require("express"),
+  express = require('express'),
   bcrypt = require('bcrypt'),
   router = Router();
 
-const e = require("express");
 const Usuario = require("../models/usuario");
+
+const app = express();
 
 // GET
 
@@ -47,6 +49,9 @@ router.get("/usuario_index", (req, res) => {
 
 });
 
+router.get("/verCuenta", async (req, res) => {
+  res.render('verCuenta');
+})
 // POST
 
 // Insercion de usuario
@@ -55,14 +60,15 @@ router.post("/registrar", async (req, res) => {
     let { clave, email } = req.body;
 
     const post = new Usuario({
-      nombre: req.body.nombre,
+      nombre: req.body.nombreUsuario,
       apellido_paterno: req.body.apellidoP,
       apellido_materno: req.body.apellidoM,
       telefono: req.body.tel,
       cedula: req.body.cedula,
       nacionalidad: req.body.country,
       clave: bcrypt.hashSync(clave, 10),
-      correo_electronico: req.body.email
+      correo_electronico: req.body.email,
+      tipoUsuario: req.body.tipoUsuario
     });
 
 
@@ -87,23 +93,32 @@ router.post("/registrar", async (req, res) => {
 router.post("/login", async (req, res) => {
   try {
     let { usuario, pass } = req.body;
-    const $usuario = await Usuario.findOne({ nombre: usuario }),
-      validarClave = await bcrypt.compare(pass, $usuario.clave);
+    await Usuario.findOne({ nombre: usuario }, async (err, dbUsuario) => {
+      if (err) { res.json(err) }
 
-    if ($usuario) {
-      if (validarClave) {
-        // res.json({
-        //   msg: "Las claves coinciden",
-        //   $usuario
-        // });
-        res.redirect('/usuario_index');
+      else if (dbUsuario) {
+        let validarClave = await bcrypt.compare(pass, dbUsuario.clave);
+
+        if (validarClave) {
+
+          if (dbUsuario.tipoUsuario == 0) {
+            res.render('usuario_index', {
+              usuario: {
+                nombre: dbUsuario.nombre
+              }
+            });
+          }
+
+          else if (dbUsuario.tipoUsuario == 1) { res.render('admin_index'); }
+
+        }
+
+        else { res.json({ msg: "La clave es inválida" }); }
       }
 
-      else { res.json({ msg: "Las claves es inválida" }); }
+      else { res.json({ msg: "Usuario no existe en la base de datos" }); }
 
-    }
-
-    else { res.json({ msg: "Usuario no existe en la base de datos" }); }
+    })
 
   } catch (error) {
     res.json({

@@ -53,6 +53,7 @@ class Server {
     this.app.use(express.static(path.resolve(__dirname, "../public")));
     //HBS
     this.app.set("view engine", "hbs");
+
   }
 
   routes() {
