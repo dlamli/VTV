@@ -1,0 +1,348 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background-image: url(../img/fondoNegro.jpg);
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+  font-family: sans-serif;
+  margin-top: 50px;
+}
+
+.regform {
+  width: 800px;
+  background-color: rgb(0, 0, 0, 0.6);
+  margin: auto;
+  color: #ffffff;
+  padding: 10px 0px;
+  border-radius: 15px 15px 0px 0px;
+}
+
+.main {
+  background-color: rgb(0, 0, 0, 0.5);
+  width: 800px;
+  margin: auto;
+  padding-bottom: unset;
+}
+
+form {
+  padding: 10px;
+}
+
+h1 {
+  text-align: center;
+}
+
+.name {
+  margin-left: 25px;
+  margin-top: 50px;
+  width: 125px;
+  color: white;
+  font-size: 18px;
+  font-weight: 700;
+}
+
+.nameKilometraje {
+  position: relative;
+  margin-left: 25px;
+  margin-top: 50px;
+  width: 125px;
+  color: white;
+  font-size: 18px;
+  font-weight: 700;
+  top: -37px;
+}
+
+.nameCilindraje {
+  margin-left: 25px;
+  margin-top: 50px;
+  width: 125px;
+  color: white;
+  font-size: 18px;
+  font-weight: 700;
+}
+
+.namePassangers {
+  position: relative;
+  margin-left: 25px;
+  margin-top: 5px;
+  width: 125px;
+  color: white;
+  font-size: 18px;
+  font-weight: 700;
+  top: -30px;
+}
+
+.nameConditions {
+  position: relative;
+  margin-left: 25px;
+  margin-top: 5px;
+  width: 125px;
+  color: white;
+  font-size: 18px;
+  font-weight: 700;
+  top: -30px;
+}
+
+.nameRightSide {
+  position: relative;
+  color: white;
+  font-weight: 700;
+  font-size: 20px;
+  left: 450px;
+  top: -68px;
+  width: 125px;
+}
+
+.optionColor {
+  position: relative;
+  left: 520px;
+  top: -100px;
+  line-height: 40px;
+  width: 200px;
+  height: 40px;
+  border-radius: 6px;
+  padding: 0 22px;
+  font-size: 16px;
+  color: #555;
+  outline: none;
+  overflow: hidden;
+}
+
+textarea {
+  width: 50%;
+  height: 150px;
+  padding: 12px 20px;
+  box-sizing: border-box;
+  border: 2px solid #ccc;
+  border-radius: 4px;
+  background-color: #f8f8f8;
+  font-size: 16px;
+  resize: none;
+}
+
+.Modelname {
+  position: relative;
+  left: 200px;
+  top: -37px;
+  line-height: 40px;
+  border-radius: 6px;
+  padding: 0 22px;
+  font-size: 16px;
+}
+
+.optionModelYear {
+  position: relative;
+  left: 315px;
+  top: -37px;
+  line-height: 40px;
+  width: 200px;
+  height: 40px;
+  border-radius: 6px;
+  padding: 0 22px;
+  font-size: 16px;
+  color: #555;
+  outline: none;
+  overflow: hidden;
+}
+
+.option {
+  position: relative;
+  left: 200px;
+  top: -37px;
+  line-height: 40px;
+  width: 480px;
+  border-radius: 6px;
+  padding: 0 22px;
+  font-size: 16px;
+  color: #555;
+}
+
+.optionCilindraje {
+  position: relative;
+  left: 200px;
+  top: -37px;
+  line-height: 40px;
+  width: 200px;
+  height: 40px;
+  border-radius: 6px;
+  padding: 0 22px;
+  font-size: 16px;
+  color: #555;
+  outline: none;
+  overflow: hidden;
+}
+
+.optionPassagers {
+  position: relative;
+  text-align: center;
+  left: 200px;
+  top: -75px;
+  line-height: 40px;
+  width: 80px;
+  height: 40px;
+  border-radius: 6px;
+  padding: 0 22px;
+  font-size: 16px;
+  color: #555;
+  outline: none;
+  overflow: hidden;
+}
+
+.optionConditions {
+  position: relative;
+  left: 200px;
+  top: -75px;
+  line-height: 40px;
+  width: 200px;
+  height: 40px;
+  border-radius: 6px;
+  padding: 0 22px;
+  font-size: 16px;
+  color: #555;
+  outline: none;
+}
+
+.codeKilometraje {
+  position: relative;
+  left: 200px;
+  top: -75px;
+  line-height: 40px;
+  width: 95px;
+  border-radius: 6px;
+  padding: 0 22px;
+  font-size: 16px;
+  color: #555;
+}
+
+.number {
+  position: relative;
+  left: 200px;
+  top: -37px;
+  line-height: 40px;
+  width: 255px;
+  border-radius: 6px;
+  padding: 0 22px;
+  font-size: 16px;
+  color: #555;
+}
+
+.phone-number {
+  position: relative;
+  color: #e5e5e5;
+  text-transform: capitalize;
+  font-size: 16px;
+  left: -100px;
+  top: -2px;
+}
+
+.optionModel {
+  position: relative;
+  left: 200px;
+  top: -37px;
+  line-height: 40px;
+  width: 200px;
+  height: 40px;
+  border-radius: 6px;
+  padding: 0 22px;
+  font-size: 16px;
+  color: #555;
+  outline: none;
+  overflow: hidden;
+}
+
+.option option {
+  font-size: 20px;
+}
+
+#coustomer {
+  margin-left: 25px;
+  color: white;
+  font-size: 18px;
+}
+
+.radio {
+  display: inline-block;
+  padding-right: 70px;
+  font-size: 25px;
+  margin-left: 25px;
+  margin-top: 15px;
+  color: white;
+}
+
+.radio input {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  cursor: pointer;
+  outline: none;
+}
+
+button {
+  position: relative;
+  top: -200px;
+  left: 250px;
+  background-color: #ffc107;
+  display: block;
+  margin: 20px 0px 0px 20px;
+  text-align: center;
+  border-radius: 12px;
+  border: 2px solid #366473;
+  padding: 14px 110px;
+  outline: none;
+  color: white;
+  cursor: pointer;
+  transition: 0.25px;
+}
+
+.extras {
+  position: relative;
+  text-align: left;
+  left: 450px;
+  top: -230px;
+  width: 300px;
+  height: 150px;
+  color: #555;
+}
+
+button:hover {
+  background-color: #164faa;
+}
+
+.content {
+  position: relative;
+  width: 100%;
+  max-width: 800px;
+  text-align: center;
+  margin: 0 auto;
+  padding: 0 0 3em 0;
+  top: -190px;
+}
+
+.content--related {
+  text-align: center;
+  font-weight: bold;
+  padding-top: 4em;
+}
+
+.box {
+  background-color: white;
+  padding: 6.25rem 1.25rem;
+  opacity: 0.6;
+  border-radius: 15px 15px 0px 0px;
+}
+
+.box + .box {
+  margin-top: 2.5rem;
+}
+
+#file-1 {
+  font-size: 24px;
+  background-color: #ffc107;
+}
+
+#file-1:hover {
+  background-color: #164faa;
+}

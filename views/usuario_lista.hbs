@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+
+{{> head}}
+
+<body>
+
+  {{> adminHeader}}
+
+  {{> section}}
+
+  <main id="main">
+    <br>
+    <hr>
+
+    {{!-- Tabla de usuarios --}}
+    <div class=" scroll tabla">
+      <table class="table">
+        <thead class="thead-dark">
+          <tr>
+            <th scope="col">ID_Usuario</th>
+            <th scope="col">Nombre</th>
+            <th scope="col">Apellido paterno</th>
+            <th scope="col">Apellido materno</th>
+            <th scope="col">Teléfono</th>
+            <th scope="col">Cédula</th>
+            <th scope="col">Nacionalidad</th>
+            <th scope="col">Correo_Electrónico</th>
+            <th scope="col">Fecha_Creación</th>
+          </tr>
+        </thead>
+        <tbody>
+          {{# each usuarioDB}}
+
+          <tr>
+            <th scope="row">{{ this._id }}</th>
+            <td>{{this.nombre}}</td>
+            <td>{{this.apellido_paterno}}</td>
+            <td>{{this.apellido_materno}}</td>
+            <td>{{this.telefono}}</td>
+            <td>{{this.cedula}}</td>
+            <td>{{this.nacionalidad}}</td>
+            <td>{{this.correo_electronico}}</td>
+            <td>{{this.fecha_creacion}}</td>
+          </tr>
+
+          {{/each}}
+
+
+        </tbody>
+      </table>
+    </div>
+
+
+
+  </main>
+  <!-- End #main -->
+
+  <!-- ======= Footer ======= -->
+  <footer id="footer">
+    <div class="container d-md-flex py-4">
+
+      <div class="mr-md-auto text-center text-md-left">
+        <div class="copyright">
+          &copy; Copyright <strong><span>VTV</span></strong>. Derechos Reservados
+        </div>
+      </div>
+      {{!-- <div class="social-links text-center text-md-right pt-3 pt-md-0">
+        <a href="#" class="twitter"><i class="bx bxl-twitter"></i></a>
+        <a href="#" class="facebook"><i class="bx bxl-facebook"></i></a>
+        <a href="#" class="instagram"><i class="bx bxl-instagram"></i></a>
+        <a href="#" class="google-plus"><i class="bx bxl-skype"></i></a>
+        <a href="#" class="linkedin"><i class="bx bxl-linkedin"></i></a>
+      </div> --}}
+    </div>
+  </footer>
+  <!-- End Footer -->
+
+  <a href="#" class="back-to-top"><i class="bx bx-up-arrow-alt"></i></a>
+
+  {{> scripts}}
+</body>
+
+</html>

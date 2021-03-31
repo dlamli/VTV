@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+
+{{> head}}
+
+<body>
+
+    <header id="header" class="fixed-top header-transparent">
+        <div class="container d-flex align-items-center">
+
+            <h1 class="logo mr-auto"><a href="/">VTV</a></h1>
+
+            <nav class="nav-menu d-none d-lg-block">
+                <ul>
+                    <li class="active"><a href="/usuario_index">Inicio</a></li>
+                    <li><a href="#portfolio">Subasta</a></li>
+                    <li><a href="/registroVenta">Ventas</a></li>
+                    <li class="drop-down"><a href="">Cuenta Usuario</a>
+                        <ul>
+                            <li><a href="#">Ver Cuenta</a></li>
+                            <!-- <li class="drop-down"><a href="#">Deep Drop Down</a>
+                                <ul>
+                                    <li><a href="#">Deep Drop Down 1</a></li>
+                                    <li><a href="#">Deep Drop Down 2</a></li>
+                                    <li><a href="#">Deep Drop Down 3</a></li>
+                                    <li><a href="#">Deep Drop Down 4</a></li>
+                                    <li><a href="#">Deep Drop Down 5</a></li>
+                                </ul>
+                            </li> -->
+                            <li><a href="/">Cerrar sesión</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </nav>
+
+        </div>
+    </header>
+
+    <section id="hero" class="d-flex align-items-center justify-content-center">
+        <div class="container position-relative">
+            <h1>Cuenta de <b style="color: #FFC107;">VTV {{ rol}} </b> !</h1>
+    </section>
+    <h2>Información de la Cuenta</h2>
+    <br>
+    <h4>Nombre del usuario: <label></label></h4>
+    <h4>Apellido materno: <label>test</label></h4>
+    <h4>Apellido materno: <label>test</label></h4>
+    <h4>Teléfono: <label>test</label></h4>
+    <h4>Cédula: <label>test</label></h4>
+    <h4>Nacionalidad: <label>test</label></h4>
+    <h4>Correo electrónico: <label>test</label></h4>
+    <h4>Fecha de registro: <label>test</label></h4>
+
+
+
+    <footer id="footer">
+        <div class="container d-md-flex py-4">
+
+            <div class="mr-md-auto text-center text-md-left">
+                <div class="copyright">
+                    &copy; Copyright <strong><span>VTV</span></strong>. Derechos Reservados
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <a href="#" class="back-to-top"><i class="bx bx-up-arrow-alt"></i></a>
+
+    {{> scripts}}
+
+</body>
+
+</html>
