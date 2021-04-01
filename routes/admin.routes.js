@@ -1,10 +1,9 @@
 const { Router } = require("express"),
-  bodyParser = require("body-parser"),
   router = Router();
 
-const { db } = require("../models/tipoUsuario");
 const tipoUsuario = require("../models/tipoUsuario"),
-  Usuario = require("../models/usuario");
+  Usuario = require("../models/usuario"),
+  Vehiculo = require("../models/vehiculo")
 
 
 //GET
@@ -16,7 +15,7 @@ router.get("/admin_index", (req, res) => {
 });
 
 router.get("/usuario_lista", async (req, res) => {
-  await Usuario.find({tipoUsuario: 0}, (err, dato) => {
+  await Usuario.find({ tipoUsuario: 0 }, (err, dato) => {
     if (err) { res.json(err) }
     else {
       res.render("usuario_lista", { usuarioDB: dato });
@@ -35,6 +34,30 @@ router.get("/subasta_lista", (req, res) => {
 });
 
 // POST
+router.post("/registrarV", async (req, res) => {
+  try {
+
+    const vehiculo = new Vehiculo({
+      modelo: req.body.modelo,
+      anho: req.body.modeloYear,
+      cilindraje: req.body.cilindraje,
+      color: req.body.color,
+      cantidadPasajeros: req.body.cantPasajeros,
+      condicionVehiculo: req.body.condicion,
+      kilometraje: req.body.kilometraje,
+      extras: req.body.extras
+    });
+
+    const saveInfo = await vehiculo.save();
+    res.json(saveInfo);
+
+  } catch (error) {
+    res.json({
+      msg: 'Ocurrio un error',
+      error
+    });
+  }
+});
 
 // Insercion de roles
 // router.post('/', async(req, res) => {

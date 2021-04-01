@@ -66,14 +66,22 @@
         <form>
             <div id="name">
                 <h2 class="name">Modelo</h2>
-                <select class="optionModel" name="subject">
-                    <option desabled="disabled" selected="selected">Modelo</option>
+                <select class="optionModel" name="modelo">
+
+                    {{!-- <option desabled="disabled" selected="selected">Modelo</option>
                     <option>Aston Martin</option>
                     <option>Audi</option>
                     <option>Bentley</option>
-                    <option>Mitsubishi</option>
+                    <option>Mitsubishi</option> --}}
+
+                    {{# each vehiculoDB}}
+
+                    <option>{{this.modelo}}</option>
+
+                    {{/each}}
+
                 </select>
-                <select class="optionModelYear" name="subject">
+                <select class="optionModelYear" name="modeloYear">
                     <option desabled="disabled" selected="selected">Año</option>
                     <option>2021</option>
                     <option>2020</option>
@@ -83,21 +91,21 @@
             </div>
             </select>
             <h2 class="nameCilindraje">Cilindraje</h2>
-            <select class="optionCilindraje" name="subject">
+            <select class="optionCilindraje" name="cilindraje">
                 <option desabled="disabled" selected="selected">Cilindraje</option>
                 <option>5.000</option>
                 <option>3.500</option>
                 <option>3.000</option>
             </select>
             <h2 class="nameRightSide">Color</h2>
-            <select class="optionColor" name="subject">
+            <select class="optionColor" name="color">
                 <option desabled="disabled" selected="selected">Color</option>
                 <option>Blanco</option>
                 <option>Negro</option>
                 <option>Rojo</option>
             </select>
             <h2 class="namePassangers">Cantidad de Pasageros</h2>
-            <select class="optionPassagers" name="subject">
+            <select class="optionPassagers" name="cantPasajeros">
                 <option desabled="disabled" selected="selected"></option>
                 <option>2</option>
                 <option>4</option>
@@ -105,13 +113,13 @@
                 <option>7</option>
             </select>
             <h2 class="nameConditions">Condicion del Vehiculo</h2>
-            <select class="optionConditions" name="subject">
+            <select class="optionConditions" name="condicion">
                 <option desabled="disabled" selected="selected"></option>
-                <option>Usuado</option>
+                <option>Usado</option>
                 <option>Nuevo</option>
             </select>
             <h2 class="nameKilometraje">Kilometraje</h2>
-            <input class="codeKilometraje" type="text" name="area_code" maxlength="3"><br>
+            <input class="codeKilometraje" type="text" name="kilometraje" maxlength="3"><br>
             <textarea name="extras" class="extras" rows="10" cols="40"
                 placeholder="Escriba la información extra"></textarea>
             <div class="content">

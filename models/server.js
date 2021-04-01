@@ -6,7 +6,6 @@ const express = require("express"),
   session = require("express-session"),
   cookieParser = require("cookie-parser"),
   bodyParser = require("body-parser"),
-  flash = require('express-flash'),
   path = require("path");
 
 const usuarioRoutes = require("../routes/usuario.routes"),

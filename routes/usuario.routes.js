@@ -3,7 +3,8 @@ const { Router } = require("express"),
   nodemailer = require('nodemailer'),
   router = Router();
 
-const Usuario = require("../models/usuario");
+const Usuario = require("../models/usuario"),
+  Vehiculo = require('../models/vehiculo');
 
 
 // Validacion de correo
@@ -48,8 +49,13 @@ router.get("/login", async (req, res) => {
 });
 
 // Ventas
-router.get("/registroVenta", (req, res) => {
-  res.render("ventaForm", {});
+router.get("/registrarV", async (req, res) => {
+  await Vehiculo.find({}, (err, dato) => {
+    if (err) { res.json(err) }
+    else {
+      res.render('ventaForm', { vehiculoDB: dato });
+    }
+  });
 });
 
 // Detalles Vehiculo
