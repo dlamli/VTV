@@ -3,8 +3,7 @@ const { Router } = require("express"),
 
 const tipoUsuario = require("../models/tipoUsuario"),
   Usuario = require("../models/usuario"),
-  Vehiculo = require("../models/vehiculo")
-
+  Vehiculo = require("../models/vehiculo");
 
 //GET
 router.get("/admin_index", (req, res) => {
@@ -33,23 +32,29 @@ router.get("/subasta_lista", (req, res) => {
   res.render("subasta_lista", {});
 });
 
+router.get("/vehiculo", async (req, res) => {
+  res.render('registroVehiculo');
+});
+
 // POST
-router.post("/registrarV", async (req, res) => {
+router.post("/vehiculo", async (req, res) => {
   try {
 
     const vehiculo = new Vehiculo({
       modelo: req.body.modelo,
-      anho: req.body.modeloYear,
       cilindraje: req.body.cilindraje,
+      anho: req.body.ahno,
       color: req.body.color,
-      cantidadPasajeros: req.body.cantPasajeros,
       condicionVehiculo: req.body.condicion,
+      cantidadPasajeros: req.body.cantidadPasajeros,
       kilometraje: req.body.kilometraje,
-      extras: req.body.extras
+      extras: req.body.infoExtra,
+      img: req.body.img
     });
 
-    const saveInfo = await vehiculo.save();
-    res.json(saveInfo);
+    res.json(vehiculo);
+    // const saveInfo = await vehiculo.save();
+    // res.json(saveInfo);
 
   } catch (error) {
     res.json({

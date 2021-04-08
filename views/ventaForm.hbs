@@ -60,20 +60,13 @@
     </header>
 
     <div class="regform">
-        <h1>Formulario de Registro</h1>
+        <h1>Formulario de Venta</h1>
     </div>
     <div class="main">
         <form>
             <div id="name">
                 <h2 class="name">Modelo</h2>
                 <select class="optionModel" name="modelo">
-
-                    {{!-- <option desabled="disabled" selected="selected">Modelo</option>
-                    <option>Aston Martin</option>
-                    <option>Audi</option>
-                    <option>Bentley</option>
-                    <option>Mitsubishi</option> --}}
-
                     {{# each vehiculoDB}}
 
                     <option>{{this.modelo}}</option>

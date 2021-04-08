@@ -18,6 +18,7 @@
 
     <section id="login" class="d-flex align-items-center justify-content-center">
         <div class="container position-relative">
+            
             {{#if mensaje}}
             <div class="alert alert-{{mensaje.tipo}} alert-dismissible fade show" role="alert">
                 <strong>{{mensaje.titulo}}</strong> {{mensaje.error}}.
@@ -26,6 +27,7 @@
                 </button>
             </div>
             {{/if}}
+
             <h1>Login <b style="color: #FFC107;">VTV</b></h1>
             <div class="contenedor-form">
                 <div class="toggle">

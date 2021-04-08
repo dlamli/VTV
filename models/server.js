@@ -26,6 +26,7 @@ class Server {
     this.middlewares();
     //Routes
     this.routes();
+
   }
 
   connectDB() {
@@ -64,7 +65,9 @@ class Server {
       res.locals.mensaje = req.session.mensaje;
       delete req.session.mensaje;
       next();
-    })
+    });
+
+
   }
 
   routes() {

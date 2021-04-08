@@ -10,7 +10,7 @@ const esquema = mongoose.Schema({
         required: true,
     },
     cilindraje: {
-        type: Number,
+        type: String,
         required: true,
     },
     color: {
@@ -31,11 +31,11 @@ const esquema = mongoose.Schema({
     },
     extras: {
         type: String,
-        required: true,
+        default: 'No hay extras.'
     },
-    fecha_creacion: {
-        type: Date,
-        default: Date.now,
+    img: {
+        type: String,
+        require: true,
     },
 });
 

@@ -26,9 +26,14 @@ let mailOptions = {
 // GET
 
 // Index
-router.get("/", (req, res) => {
+router.get("/", async (req, res) => {
   try {
-    res.render("index", {});
+    await Vehiculo.find({}, (err, dato) => {
+      if (err) { res.json(err) }
+      else {
+        res.render('index', { vehiculoDB: dato });
+      }
+    });
 
   } catch (error) {
     res.json({
