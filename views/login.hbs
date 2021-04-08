@@ -18,12 +18,21 @@
 
     <section id="login" class="d-flex align-items-center justify-content-center">
         <div class="container position-relative">
+            
+            {{#if mensaje}}
+            <div class="alert alert-{{mensaje.tipo}} alert-dismissible fade show" role="alert">
+                <strong>{{mensaje.titulo}}</strong> {{mensaje.error}}.
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            {{/if}}
+
             <h1>Login <b style="color: #FFC107;">VTV</b></h1>
             <div class="contenedor-form">
                 <div class="toggle">
                     <span> Crear Cuenta</span>
                 </div>
-
                 <div class="formulario">
                     <h2>Iniciar Sesión</h2>
                     <br>
@@ -34,8 +43,6 @@
                             min="8" maxlength="20" required>
                         <input id="btnLogin" type="submit" value="Log In"></input>
                         <br>
-
-                        {{!-- <p id="msg" class="text-warning"></p> --}}
                     </form>
                 </div>
 

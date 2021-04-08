@@ -1,6 +1,4 @@
-const mongoose = require("mongoose"),
-  bcrypt = require("bcrypt");
-const saltRounds = 10;
+const mongoose = require("mongoose");
 
 const esquema = mongoose.Schema({
   nombre: {

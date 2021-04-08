@@ -1,11 +1,9 @@
 const { Router } = require("express"),
-  bodyParser = require("body-parser"),
   router = Router();
 
-const { db } = require("../models/tipoUsuario");
 const tipoUsuario = require("../models/tipoUsuario"),
-  Usuario = require("../models/usuario");
-
+  Usuario = require("../models/usuario"),
+  Vehiculo = require("../models/vehiculo");
 
 //GET
 router.get("/admin_index", (req, res) => {
@@ -16,7 +14,7 @@ router.get("/admin_index", (req, res) => {
 });
 
 router.get("/usuario_lista", async (req, res) => {
-  await Usuario.find({tipoUsuario: 0}, (err, dato) => {
+  await Usuario.find({ tipoUsuario: 0 }, (err, dato) => {
     if (err) { res.json(err) }
     else {
       res.render("usuario_lista", { usuarioDB: dato });
@@ -34,7 +32,37 @@ router.get("/subasta_lista", (req, res) => {
   res.render("subasta_lista", {});
 });
 
+router.get("/vehiculo", async (req, res) => {
+  res.render('registroVehiculo');
+});
+
 // POST
+router.post("/vehiculo", async (req, res) => {
+  try {
+
+    const vehiculo = new Vehiculo({
+      modelo: req.body.modelo,
+      cilindraje: req.body.cilindraje,
+      anho: req.body.ahno,
+      color: req.body.color,
+      condicionVehiculo: req.body.condicion,
+      cantidadPasajeros: req.body.cantidadPasajeros,
+      kilometraje: req.body.kilometraje,
+      extras: req.body.infoExtra,
+      img: req.body.img
+    });
+
+    res.json(vehiculo);
+    // const saveInfo = await vehiculo.save();
+    // res.json(saveInfo);
+
+  } catch (error) {
+    res.json({
+      msg: 'Ocurrio un error',
+      error
+    });
+  }
+});
 
 // Insercion de roles
 // router.post('/', async(req, res) => {

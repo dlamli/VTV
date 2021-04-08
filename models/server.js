@@ -3,6 +3,8 @@ const express = require("express"),
   hbs = require("hbs"),
   cors = require("cors"),
   mongoose = require("mongoose"),
+  session = require("express-session"),
+  cookieParser = require("cookie-parser"),
   bodyParser = require("body-parser"),
   path = require("path");
 
@@ -12,24 +14,25 @@ const usuarioRoutes = require("../routes/usuario.routes"),
 class Server {
 
   constructor() {
+    // Express
     this.app = express();
+    // Puerto
     this.port = process.env.PORT;
-    this.mongoURL = process.env.DB_CONNECTION;
-
+    // this.mongoURL = process.env.DB_CONNECTION;
+    this.mongoCloudURL = process.env.DB_CLOUD;
     //Database
     this.connectDB();
-
     //Middlewares
     this.middlewares();
-
     //Routes
     this.routes();
+
   }
 
   connectDB() {
     console.log("Estableciendo conexion a la base de datos...");
     mongoose.connect(
-      this.mongoURL,
+      this.mongoCloudURL,
       {
         useNewUrlParser: true,
         useUnifiedTopology: true,
@@ -53,6 +56,17 @@ class Server {
     this.app.use(express.static(path.resolve(__dirname, "../public")));
     //HBS
     this.app.set("view engine", "hbs");
+    // CookieParser
+    this.app.use(cookieParser('secret'));
+    //Session
+    this.app.use(session({ cookie: { maxAge: null } }));
+    //Mensaje Flash
+    this.app.use((req, res, next) => {
+      res.locals.mensaje = req.session.mensaje;
+      delete req.session.mensaje;
+      next();
+    });
+
 
   }
 

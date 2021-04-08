@@ -27,6 +27,14 @@ body {
   padding-bottom: unset;
 }
 
+#btnRegistrarVehiculo {
+  text-align: center;
+}
+
+label {
+  color: white;
+}
+
 form {
   padding: 10px;
 }

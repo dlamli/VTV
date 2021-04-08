@@ -1,12 +1,11 @@
 const { Router } = require("express"),
-  express = require('express'),
   bcrypt = require('bcrypt'),
   nodemailer = require('nodemailer'),
   router = Router();
 
-const Usuario = require("../models/usuario");
+const Usuario = require("../models/usuario"),
+  Vehiculo = require('../models/vehiculo');
 
-const app = express();
 
 // Validacion de correo
 let transporter = nodemailer.createTransport({
@@ -27,9 +26,14 @@ let mailOptions = {
 // GET
 
 // Index
-router.get("/", (req, res) => {
+router.get("/", async (req, res) => {
   try {
-    res.render("index", {});
+    await Vehiculo.find({}, (err, dato) => {
+      if (err) { res.json(err) }
+      else {
+        res.render('index', { vehiculoDB: dato });
+      }
+    });
 
   } catch (error) {
     res.json({
@@ -50,8 +54,13 @@ router.get("/login", async (req, res) => {
 });
 
 // Ventas
-router.get("/registroVenta", (req, res) => {
-  res.render("ventaForm", {});
+router.get("/registrarV", async (req, res) => {
+  await Vehiculo.find({}, (err, dato) => {
+    if (err) { res.json(err) }
+    else {
+      res.render('ventaForm', { vehiculoDB: dato });
+    }
+  });
 });
 
 // Detalles Vehiculo
@@ -69,6 +78,7 @@ router.get("/usuario_index", (req, res) => {
 router.get("/verCuenta", async (req, res) => {
   res.render('verCuenta');
 })
+
 
 // POST
 
@@ -89,24 +99,34 @@ router.post("/registrar", async (req, res) => {
       tipoUsuario: req.body.tipoUsuario
     });
 
-
     await Usuario.findOne({ correo_electronico: email }, async (err, result) => {
       if (err) { console.log(err); }
 
-      else if (result) { res.json({ msg: "Ya existe el correo electrónico " }); }
+      else if (result) {
+        req.session.mensaje = {
+          tipo: 'danger',
+          titulo: '|Error|',
+          error: 'Ya existe el correo electrónico'
+        }
+        res.redirect('/login');
+      }
 
       else {
         const saveInfo = await post.save();
-        res.json(saveInfo);
+        req.session.mensaje = {
+          tipo: 'success',
+          titulo: '|Registro exitoso|',
+          error: 'Se ha creado el usuario'
+        }
+        res.redirect('/login');
 
-        transporter.sendMail(mailOptions, function (error, info) {
-          if (error) {
-            console.log(error);
-          } else {
-            console.log('Email sent: ' + info.response);
-          }
-        });
-
+        // transporter.sendMail(mailOptions, function (error, info) {
+        //   if (error) {
+        //     console.log(error);
+        //   } else {
+        //     console.log('Email sent: ' + info.response);
+        //   }
+        // });
       }
 
     });
@@ -120,6 +140,7 @@ router.post("/registrar", async (req, res) => {
 router.post("/login", async (req, res) => {
   try {
     let { usuario, pass } = req.body;
+
     await Usuario.findOne({ nombre: usuario }, async (err, dbUsuario) => {
       if (err) { res.json(err) }
 
@@ -140,10 +161,24 @@ router.post("/login", async (req, res) => {
 
         }
 
-        else { res.json({ msg: "La clave es inválida" }); }
+        else {
+          req.session.mensaje = {
+            tipo: 'danger',
+            titulo: '|Error|',
+            error: 'La clave es inválida'
+          }
+          res.redirect('/login');
+        }
       }
 
-      else { res.json({ msg: "Usuario no existe en la base de datos" }); }
+      else {
+        req.session.mensaje = {
+          tipo: 'primary',
+          titulo: 'Ups!',
+          error: 'El usuario no existe en la base de datos'
+        }
+        res.redirect('/login');
+      }
 
     })
 
