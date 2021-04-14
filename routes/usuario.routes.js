@@ -4,6 +4,7 @@ const { Router } = require("express"),
   router = Router();
 
 const Usuario = require("../models/usuario"),
+  Venta = require('../models/venta'),
   Vehiculo = require('../models/vehiculo');
 
 
@@ -28,6 +29,7 @@ let mailOptions = {
 // Index
 router.get("/", async (req, res) => {
   try {
+
     await Vehiculo.find({}, (err, dato) => {
       if (err) { res.json(err) }
       else {
@@ -55,10 +57,16 @@ router.get("/login", async (req, res) => {
 
 // Ventas
 router.get("/registrarV", async (req, res) => {
-  await Vehiculo.find({}, (err, dato) => {
+  await Vehiculo.find({}, (err, datoVehiculo) => {
     if (err) { res.json(err) }
     else {
-      res.render('ventaForm', { vehiculoDB: dato });
+      Usuario.find({}, (err, dato) => {
+        if (err) { res.json(err) }
+        else {
+          res.render('ventaForm', { vehiculoDB: datoVehiculo, usuarioDB: dato });
+        }
+      });
+      // res.render('ventaForm', { vehiculoDB: dato });
     }
   });
 });
@@ -69,8 +77,19 @@ router.get("/detalles", (req, res) => {
 });
 
 // Index del usuario
-router.get("/usuario_index", (req, res) => {
-  res.render("usuario_index.hbs", {});
+router.get("/usuario_index", async (req, res) => {
+  try {
+    await Venta.find({}, (err, dato) => {
+      if (err) { res.json(err) }
+      else {
+        res.render('usuario_index', { ventaDB: dato });
+      }
+    });
+  } catch (error) {
+    res.json({
+      error
+    });
+  }
 
 
 });
@@ -96,7 +115,8 @@ router.post("/registrar", async (req, res) => {
       nacionalidad: req.body.country,
       clave: bcrypt.hashSync(clave, 10),
       correo_electronico: req.body.email,
-      tipoUsuario: req.body.tipoUsuario
+      tipoUsuario: req.body.tipoUsuario,
+
     });
 
     await Usuario.findOne({ correo_electronico: email }, async (err, result) => {
@@ -152,15 +172,13 @@ router.post("/login", async (req, res) => {
           if (dbUsuario.tipoUsuario == 0) {
             res.render('usuario_index', {
               usuario: {
+                id: dbUsuario._id,
                 nombre: dbUsuario.nombre
               }
             });
           }
-
           else if (dbUsuario.tipoUsuario == 1) { res.render('admin_index'); }
-
         }
-
         else {
           req.session.mensaje = {
             tipo: 'danger',
@@ -188,6 +206,34 @@ router.post("/login", async (req, res) => {
     });
   }
 
+});
+
+router.post("/registrarV", async (req, res) => {
+  try {
+    const { vehiculoID } = req.body;
+
+    const getVehiculoId = await Vehiculo.findById({ _id: vehiculoID });
+
+    let imgURL = getVehiculoId.img;
+
+    const venta = new Venta({
+      vehiculo_id: vehiculoID,
+      cliente_id: req.body.usuarioID,
+      precio: req.body.precio,
+      img: imgURL
+    });
+
+    venta.save();
+    req.session.mensaje = {
+      tipo: 'success',
+      titulo: '|Venta registrado|',
+      error: 'Se registro la venta correctamente'
+    }
+    res.redirect('/usuario_index');
+
+  } catch (error) {
+    res.json(error)
+  }
 });
 
 module.exports = router;

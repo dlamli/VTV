@@ -1,4 +1,8 @@
-const mongoose = require("mongoose");
+const mongoose = require("mongoose"),
+  dateFormat = require('dateformat'),
+  now = new Date();
+
+let fechaActual = dateFormat(now, 'dd/mm/yyyy');
 
 const esquema = mongoose.Schema({
   nombre: {
@@ -35,8 +39,8 @@ const esquema = mongoose.Schema({
     required: true,
   },
   fecha_creacion: {
-    type: Date,
-    default: Date.now,
+    type: String,
+    default: fechaActual
   },
   tipoUsuario: {
     type: Number,

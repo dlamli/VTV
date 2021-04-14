@@ -35,7 +35,7 @@ const esquema = mongoose.Schema({
     },
     img: {
         type: String,
-        require: true,
+        required: true,
     },
 });
 

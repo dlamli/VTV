@@ -39,7 +39,7 @@
 
     <div class="main">
 
-        <form method="POST" action="/vehiculo">
+        <form method="POST" action="/vehiculo" enctype="multipart/form-data">
 
             <div class="form-group">
                 <label>Modelo: </label>
@@ -187,8 +187,8 @@
                     name="infoExtra"></textarea>
             </div>
             <div class="form-group">
-                <label for="exampleFormControlFile1">Imagen del vehículo</label>
-                <input type="file" id="imgSRC" class="form-control-file" name="img">
+                <label>Imagen del vehículo</label>
+                <input type="file" name="img" id="imgSRC" class="form-control-file text-white">
             </div>
             <br>
             <br>

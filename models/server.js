@@ -6,6 +6,7 @@ const express = require("express"),
   session = require("express-session"),
   cookieParser = require("cookie-parser"),
   bodyParser = require("body-parser"),
+  methodOverride = require('method-override'),
   path = require("path");
 
 const usuarioRoutes = require("../routes/usuario.routes"),
@@ -66,6 +67,8 @@ class Server {
       delete req.session.mensaje;
       next();
     });
+    //Method Override
+    this.app.use(methodOverride('_method'));
 
 
   }

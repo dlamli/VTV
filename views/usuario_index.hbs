@@ -39,131 +39,25 @@
     <section id="hero" class="d-flex align-items-center justify-content-center">
         <div class="container position-relative">
 
-            <h1>Bienvenido <b id="tituloUsuario">{{usuario.nombre}}</b></h1>
+            <h1>Bienvenido <b id="tituloUsuario">{{usuario._id}}</b></h1>
         </div>
     </section>
 
     <main id="main">
 
-        <section id="portfolio" class="portfolio">
-            <div class="container">
+        {{#if mensaje}}
+        <div class="alert alert-{{mensaje.tipo}} alert-dismissible fade show" role="alert">
+            <strong>{{mensaje.titulo}}</strong> {{mensaje.error}}.
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        {{/if}}
 
-                <div class="section-title">
-                    <h2>Subastas destacadas</h2>
-                    <p>Mira rapidamente las subastas más populares y de más interés </p>
-                </div>
+        {{> venta}}
 
-                <div class="row">
-                    <div class="col-lg-12 d-flex justify-content-center">
-                        <ul id="portfolio-flters">
-                            <li data-filter="*" class="filter-active">Todos</li>
-                            <li data-filter=".filter-carro">Carros</li>
-                            <li data-filter=".filter-moto">Motos</li>
-                        </ul>
-                    </div>
-                </div>
 
-                <div class="row portfolio-container">
 
-                    <div class="col-lg-4 col-md-6 portfolio-item filter-carro">
-                        <img src="assets/img/Carros/imgC1.jpg" class="img-fluid" alt="">
-                        <div class="portfolio-info">
-                            <h4>Carro Blanco</h4>
-                            <p>Carro</p>
-                            <a href="assets/img/portfolio/portfolio-1.jpg" data-gall="portfolioGallery"
-                                class="venobox preview-link" title="App 1"><i class="bx bx-plus"></i></a>
-                            <a href="/portfolio-details" data-gall="portfolioDetailsGallery" data-vbtype="iframe"
-                                class="venobox details-link" title="Portfolio Details"><i class="bx bx-link"></i></a>
-                        </div>
-                    </div>
-
-                    <div class="col-lg-4 col-md-6 portfolio-item filter-carro">
-                        <img src="assets/img/Carros/imgC2.jpg" class="img-fluid" alt="">
-                        <div class="portfolio-info">
-                            <h4>Carro Negro</h4>
-                            <p>Carro</p>
-                            <a href="assets/img/portfolio/portfolio-3.jpg" data-gall="portfolioGallery"
-                                class="venobox preview-link" title="App 2"><i class="bx bx-plus"></i></a>
-                            <a href="/portfolio-details" data-gall="portfolioDetailsGallery" data-vbtype="iframe"
-                                class="venobox details-link" title="Portfolio Details"><i class="bx bx-link"></i></a>
-                        </div>
-                    </div>
-
-                    <div class="col-lg-4 col-md-6 portfolio-item filter-moto">
-                        <img src="assets/img/Motos/imgM1.jpg" class="img-fluid" alt="">
-                        <div class="portfolio-info">
-                            <h4>Moto Verde</h4>
-                            <p>Moto</p>
-                            <a href="assets/img/portfolio/portfolio-4.jpg" data-gall="portfolioGallery"
-                                class="venobox preview-link" title="Card 2"><i class="bx bx-plus"></i></a>
-                            <a href="/portfolio-details" data-gall="portfolioDetailsGallery" data-vbtype="iframe"
-                                class="venobox details-link" title="Portfolio Details"><i class="bx bx-link"></i></a>
-                        </div>
-                    </div>
-
-                    <div class="col-lg-4 col-md-6 portfolio-item filter-carro">
-                        <img src="assets/img/Carros/imgC3.jpg" class="img-fluid" alt="">
-                        <div class="portfolio-info">
-                            <h4>Toyota</h4>
-                            <p>Carro</p>
-                            <a href="assets/img/portfolio/portfolio-6.jpg" data-gall="portfolioGallery"
-                                class="venobox preview-link" title="App 3"><i class="bx bx-plus"></i></a>
-                            <a href="/portfolio-details" data-gall="portfolioDetailsGallery" data-vbtype="iframe"
-                                class="venobox details-link" title="Portfolio Details"><i class="bx bx-link"></i></a>
-                        </div>
-                    </div>
-
-                    <div class="col-lg-4 col-md-6 portfolio-item filter-moto">
-                        <img src="assets/img/Motos/imgM2.jpg" class="img-fluid" alt="">
-                        <div class="portfolio-info">
-                            <h4>Moto Negro</h4>
-                            <p>Moto</p>
-                            <a href="assets/img/portfolio/portfolio-7.jpg" data-gall="portfolioGallery"
-                                class="venobox preview-link" title="Card 1"><i class="bx bx-plus"></i></a>
-                            <a href="/portfolio-details" data-gall="portfolioDetailsGallery" data-vbtype="iframe"
-                                class="venobox details-link" title="Portfolio Details"><i class="bx bx-link"></i></a>
-                        </div>
-                    </div>
-
-                    <div class="col-lg-4 col-md-6 portfolio-item filter-carro">
-                        <img src="assets/img/Carros/imgC4.jpg" class="img-fluid" alt="">
-                        <div class="portfolio-info">
-                            <h4>Carro Deportivo Blanco</h4>
-                            <p>Carro Blanco</p>
-                            <a href="assets/img/portfolio/portfolio-8.jpg" data-gall="portfolioGallery"
-                                class="venobox preview-link" title="Card 3"><i class="bx bx-plus"></i></a>
-                            <a href="/portfolio-details" data-gall="portfolioDetailsGallery" data-vbtype="iframe"
-                                class="venobox details-link" title="Portfolio Details"><i class="bx bx-link"></i></a>
-                        </div>
-                    </div>
-
-                    <div class="col-lg-4 col-md-6 portfolio-item filter-moto">
-                        <img src="assets/img/Motos/imgM3.jpg" class="img-fluid" alt="">
-                        <div class="portfolio-info">
-                            <h4>Moto Azul</h4>
-                            <p>Moto</p>
-                            <a href="assets/img/portfolio/portfolio-7.jpg" data-gall="portfolioGallery"
-                                class="venobox preview-link" title="Card 1"><i class="bx bx-plus"></i></a>
-                            <a href="/portfolio-details" data-gall="portfolioDetailsGallery" data-vbtype="iframe"
-                                class="venobox details-link" title="Portfolio Details"><i class="bx bx-link"></i></a>
-                        </div>
-                    </div>
-
-                    <div class="col-lg-4 col-md-6 portfolio-item filter-moto">
-                        <img src="assets/img/Motos/imgM4.jpg" class="img-fluid" alt="">
-                        <div class="portfolio-info">
-                            <h4>Moto Negro</h4>
-                            <p>Moto</p>
-                            <a href="assets/img/portfolio/portfolio-7.jpg" data-gall="portfolioGallery"
-                                class="venobox preview-link" title="Card 1"><i class="bx bx-plus"></i></a>
-                            <a href="/portfolio-details" data-gall="portfolioDetailsGallery" data-vbtype="iframe"
-                                class="venobox details-link" title="Portfolio Details"><i class="bx bx-link"></i></a>
-                        </div>
-                    </div>
-
-                </div>
-            </div>
-        </section>
     </main>
 
     <footer id="footer">

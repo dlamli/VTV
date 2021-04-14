@@ -63,68 +63,50 @@
         <h1>Formulario de Venta</h1>
     </div>
     <div class="main">
-        <form>
-            <div id="name">
-                <h2 class="name">Modelo</h2>
-                <select class="optionModel" name="modelo">
-                    {{# each vehiculoDB}}
+        <form action="/registrarV" method="POST">
 
-                    <option>{{this.modelo}}</option>
+            <h2 class="vehiculoID">Vehiculo ID:</h2>
+            <select id="vehiculoID" class="optionVehiculoID" name="vehiculoID">
+                {{# each vehiculoDB}}
 
-                    {{/each}}
+                <option>{{this._id}}</option>
 
-                </select>
-                <select class="optionModelYear" name="modeloYear">
-                    <option desabled="disabled" selected="selected">Año</option>
-                    <option>2021</option>
-                    <option>2020</option>
-                    <option>2019</option>
-                    <option>2018</option>
-                </select>
+                {{/each}}
+            </select>
+            {{!-- <h2 class="vehiculoID">Modelo del vehículo:
+                <input id="modeloVehiculo" type="text" placeholder="Modelo del vehículo" max="100" disabled>
+            </h2> --}}
+            <h2 class="usuarioID">Usuario ID:</h2>
+            <select class="optionVehiculoID" name="usuarioID">
+                {{# each usuarioDB}}
+
+                <option>{{this._id}}</option>
+
+                {{/each}}
+            </select>
+            {{!-- <h2 class="vehiculoID">Correo del usuario: <input id="correoUsuario" type="text"
+                    placeholder="Correo del usuario" disabled>
+            </h2> --}}
+            <br>
+            <br>
+            <h2 class="precio">Precio:</h2>
+            <input class="codePrecio" type="text" name="precio" maxlength="7" placeholder="₡" required><br>
+            <div class="form-group">
+                <label>Imagen del vehículo</label>
             </div>
-            </select>
-            <h2 class="nameCilindraje">Cilindraje</h2>
-            <select class="optionCilindraje" name="cilindraje">
-                <option desabled="disabled" selected="selected">Cilindraje</option>
-                <option>5.000</option>
-                <option>3.500</option>
-                <option>3.000</option>
-            </select>
-            <h2 class="nameRightSide">Color</h2>
-            <select class="optionColor" name="color">
-                <option desabled="disabled" selected="selected">Color</option>
-                <option>Blanco</option>
-                <option>Negro</option>
-                <option>Rojo</option>
-            </select>
-            <h2 class="namePassangers">Cantidad de Pasageros</h2>
-            <select class="optionPassagers" name="cantPasajeros">
-                <option desabled="disabled" selected="selected"></option>
-                <option>2</option>
-                <option>4</option>
-                <option>5</option>
-                <option>7</option>
-            </select>
-            <h2 class="nameConditions">Condicion del Vehiculo</h2>
-            <select class="optionConditions" name="condicion">
-                <option desabled="disabled" selected="selected"></option>
-                <option>Usado</option>
-                <option>Nuevo</option>
-            </select>
-            <h2 class="nameKilometraje">Kilometraje</h2>
-            <input class="codeKilometraje" type="text" name="kilometraje" maxlength="3"><br>
-            <textarea name="extras" class="extras" rows="10" cols="40"
-                placeholder="Escriba la información extra"></textarea>
-            <div class="content">
-                <div class="box">
-                    <input type="file" name="file-1[]" id="file-1" class="inputfile inputfile-1"
-                        data-multiple-caption="{count} files selected" multiple />
-                </div>
-            </div>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+
             <button type="submit">Enviar</button>
         </form>
     </div>
-
 
     <footer id="footer">
         <div class="container d-md-flex py-4">
@@ -157,6 +139,7 @@
     <script src="assets/vendor/isotope-layout/isotope.pkgd.min.js"></script>
     <script src="assets/vendor/venobox/venobox.min.js"></script>
     <script src="assets/js/components/validaciones.js"> </script>
+    <script src="assets/js/components/eventos.js"></script>
 
 
     <!-- Template Main JS File -->

@@ -1,0 +1,38 @@
+<section id="portfolio" class="portfolio">
+    <div class="container">
+        <div class="section-title">
+            <h2>Ventas destacadas</h2>
+            <p>Mira rapidamente las ventas más populares y de más interés </p>
+        </div>
+
+        <div class="row">
+            <div class="col-lg-12 d-flex justify-content-center">
+                <ul id="portfolio-flters">
+                    <li data-filter="*" class="filter-active">Todos</li>
+                    <li data-filter=".filter-carro">Carros</li>
+                    <li data-filter=".filter-moto">Motos</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="row portfolio-container">
+
+            {{# each ventaDB}}
+
+            <div class="col-lg-4 col-md-6 portfolio-item filter-carro">
+                <img src="{{this.img}}" class="img-fluid" alt="">
+                <div class="portfolio-info">
+                    <h4>{{this.cliente_id}}</h4>
+                    <p>{{this.vehiculo_id}}</p>
+                    <a href="assets/img/portfolio/portfolio-1.jpg" data-gall="portfolioGallery"
+                        class="venobox preview-link" title="App 1"><i class="bx bx-plus"></i></a>
+                    <a href="/detalles" data-gall="portfolioDetailsGallery" data-vbtype="iframe"
+                        class="venobox details-link" title="Portfolio Details"><i class="bx bx-link"></i></a>
+                </div>
+            </div>
+
+            {{/each}}
+
+        </div>
+    </div>
+</section>

@@ -7,11 +7,22 @@
 
     {{> section}}
 
+    {{#if mensaje}}
+    <div class="alert alert-{{mensaje.tipo}} alert-dismissible fade show" role="alert">
+        <strong>{{mensaje.titulo}}</strong> {{mensaje.error}}.
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    {{/if}}
+
     <main id="main">
 
         {{> counter}}
 
         {{> subasta}}
+
+        {{> venta}}
 
     </main>
 
