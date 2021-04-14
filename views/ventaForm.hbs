@@ -63,7 +63,7 @@
         <h1>Formulario de Venta</h1>
     </div>
     <div class="main">
-        <form action="/registrarV" method="POST">
+        <form id="formVenta" action="/registrarV" method="POST">
 
             <h2 class="vehiculoID">Vehiculo ID:</h2>
             <select id="vehiculoID" class="optionVehiculoID" name="vehiculoID">
@@ -92,18 +92,18 @@
             <h2 class="precio">Precio:</h2>
             <input class="codePrecio" type="text" name="precio" maxlength="7" placeholder="₡" required><br>
             <div class="form-group">
-                <label>Imagen del vehículo</label>
+                <label>Imagen del vehículo </label>
             </div>
             <br>
             <br>
             <br>
             <br>
             <br>
+            <button type="button" id="btnMostrar" class="btn btn-primary btnMostrar">Mostrar</button>
             <br>
             <br>
             <br>
             <br>
-
             <button type="submit">Enviar</button>
         </form>
     </div>

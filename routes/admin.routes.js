@@ -86,6 +86,15 @@ router.get("/subasta_lista", (req, res) => {
   res.render("subasta_lista", {});
 });
 
+router.get("/venta_lista", async (req, res) => {
+  await Venta.find({}, (err, dato) => {
+    if (err) { res.json(err) }
+    else {
+      res.render("venta_lista", { ventaDB: dato });
+    }
+  });
+});
+
 router.get("/vehiculo", async (req, res) => {
   res.render('registroVehiculo');
 });
