@@ -1,6 +1,5 @@
 const { Router } = require("express"),
   bcrypt = require('bcrypt'),
-  nodemailer = require('nodemailer'),
   router = Router();
 
 const { count } = require("../models/usuario");
@@ -8,22 +7,6 @@ const Usuario = require("../models/usuario"),
   Venta = require('../models/venta'),
   Vehiculo = require('../models/vehiculo');
 
-
-// Validacion de correo
-let transporter = nodemailer.createTransport({
-  service: 'gmail',
-  auth: {
-    user: 'pruebaconfirma@gmail.com',
-    pass: 'confirma123'
-  }
-});
-
-let mailOptions = {
-  from: 'pruebaconfirma@gmail.com',
-  to: 'sebasq13@outlook.com',
-  subject: 'Prueba',
-  text: 'Correo'
-};
 
 // GET
 
@@ -171,13 +154,6 @@ router.post("/registrar", async (req, res) => {
         }
         res.redirect('/login');
 
-        // transporter.sendMail(mailOptions, function (error, info) {
-        //   if (error) {
-        //     console.log(error);
-        //   } else {
-        //     console.log('Email sent: ' + info.response);
-        //   }
-        // });
       }
 
     });
@@ -283,12 +259,5 @@ router.post("/registrarV", async (req, res) => {
     res.json(error)
   }
 });
-
-const counterUsuario = Usuario.count({}, (err, count) => {
-  if (err) { res.json(err) }
-
-  return count;
-});
-
 
 module.exports = router;
