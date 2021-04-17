@@ -18,8 +18,6 @@ const storage = multer.diskStorage({
   filename: function (req, file, cb) {
     let date = new Date();
     //ruta de acceso img
-    // uploads/images/2021-3-9-asus.jpg
-
     cb(null, date.getFullYear() + '-' + date.getMonth() + '-' + date.getDate() + '-' + file.originalname);
   }
 
@@ -53,7 +51,7 @@ router.get("/admin_index", async (req, res) => {
     await Vehiculo.find({}, (err, datoVehiculo) => {
       if (err) { res.json(err) }
       else {
-        Venta.find({}, (err, datoVenta) => {
+        Venta.find({ estado: 1 }, (err, datoVenta) => {
           res.render('admin_index',
             {
               vehiculoDB: datoVehiculo,
@@ -73,6 +71,130 @@ router.get("/admin_index", async (req, res) => {
 
 });
 
+// Información del vehículo
+router.get('/sobreVehiculo/:vehiculoID', async (req, res) => {
+  try {
+    await Vehiculo.findOne({ _id: req.params.vehiculoID }, (err, datoVehiculo) => {
+      if (err) { res.json(err) }
+      else {
+        res.render('detalles-vehiculo',
+          { vehiculoDB: datoVehiculo }
+        );
+      }
+    });
+
+  } catch (error) {
+    res.json({
+      error
+    });
+  }
+});
+
+//Información de venta
+router.get('/sobreVenta/:ventaID', async (req, res) => {
+  try {
+    await Venta.findOne({ _id: req.params.ventaID }, (err, data) => {
+      if (err) { res.json(err) }
+      else {
+        res.render('detalles-venta',
+          { ventaDB: data },
+        );
+      }
+    });
+
+  } catch (error) {
+    res.json({
+      error
+    });
+  }
+});
+
+// Actualizar usuario
+router.get('/usuario/actualizar/:usuarioID', (req, res) => {
+  try {
+    Usuario.findById(req.params.usuarioID, (err, dato) => {
+      if (err) { res.json(err) }
+
+      res.render('datoUsuario',
+        { usuarioDB: dato },
+      );
+    });
+
+  } catch (error) {
+    res.json({ error });
+  }
+});
+
+// Actualizar vehiculo
+router.get('/vehiculo/actualizar/:vehiculoID', (req, res) => {
+  try {
+    Vehiculo.findById(req.params.vehiculoID, (err, dato) => {
+      if (err) { res.json(err) }
+
+      res.render('datoVehiculo',
+        { vehiculoDB: dato },
+      );
+    });
+
+  } catch (error) {
+    res.json({ error });
+  }
+});
+
+// Eliminar ID
+router.get('/delete/usuario/:userID', (req, res) => {
+  Usuario.findByIdAndRemove(req.params.userID, (err, doc) => {
+
+    if (!err) {
+      res.redirect('/usuario_lista');
+    } else {
+      res.json({
+        msg: 'Ocurrió un error al eliminar un usuario',
+        err
+      })
+    }
+
+  });
+});
+
+// Eliminar venta
+router.get('/delete/venta/:ventaID', (req, res) => {
+  Venta.findByIdAndUpdate(req.params.ventaID, { estado: 0 }, (err, doc) => {
+
+    if (!err) {
+      res.redirect('/venta_lista');
+    } else {
+      res.json({
+        msg: 'Ocurrió un error al eliminar la venta',
+        err
+      })
+    }
+
+  });
+});
+
+// Eliminar vehiculo
+router.get('/delete/vehiculo/:vehiculoID', (req, res) => {
+  Vehiculo.findByIdAndRemove(req.params.vehiculoID, (err, doc) => {
+
+    if (!err) {
+      req.session.mensaje = {
+        tipo: 'success',
+        titulo: 'Vehículo eliminado',
+        error: 'Se ha eliminado correctamente el vehiculo'
+      }
+      res.redirect('/admin_index');
+    } else {
+      res.json({
+        msg: 'Ocurrió un error al eliminar la venta',
+        err
+      })
+    }
+
+  });
+});
+
+
 router.get("/usuario_lista", async (req, res) => {
   await Usuario.find({ tipoUsuario: 0 }, (err, dato) => {
     if (err) { res.json(err) }
@@ -87,12 +209,23 @@ router.get("/subasta_lista", (req, res) => {
 });
 
 router.get("/venta_lista", async (req, res) => {
-  await Venta.find({}, (err, dato) => {
+  await Venta.find({ estado: 1 }, (err, dato) => {
     if (err) { res.json(err) }
     else {
       res.render("venta_lista", { ventaDB: dato });
     }
   });
+
+});
+
+router.get("/vehiculo_lista", async (req, res) => {
+  await Vehiculo.find({}, (err, dato) => {
+    if (err) { res.json(err) }
+    else {
+      res.render("vehiculo_lista", { vehiculoDB: dato });
+    }
+  });
+
 });
 
 router.get("/vehiculo", async (req, res) => {
@@ -140,92 +273,55 @@ router.post("/vehiculo", upload.single('img'), async (req, res) => {
   }
 });
 
-// ID
-// router.post("/findID", async (req, res) => {
-//   try {
-//     const getVehiculoId = await Vehiculo.findById({ _id: req.body.id });
+router.post("/usuario/actualizar", (req, res) => {
 
-//     res.json(getVehiculoId.img);
+  actualizar(req, res)
 
-//   } catch (error) {
-//     res.json(error);
-//   }
-// });
-
-// DELETE
-// Delete Usuario
-router.delete('/:id', async (req, res) => {
-  try {
-    const deleteUsuario = await Usuario.remove({ _id: req.params.id });
-    res.json({
-      msg: 'Usuario eliminado',
-      deleteUsuario
-    });
-  } catch (error) {
-    res.json({
-      msg: error
-    });
-  }
 });
 
-// Update Usuario
-router.put('/:id', async (req, res) => {
-  try {
-    const updateUsuario = await Usuario.updateOne({ _id: req.params.id }, {
-      $set: {
-        nombre: req.body.nombre,
-        apellido_paterno: req.body.apellido_paterno,
-        apellido_materno: req.body.apellido_materno,
-        telefono: req.body.telefono,
-        cedula: req.body.cedula,
-        nacionalidad: req.body.nacionalidad,
-        clave: req.body.clave,
-        correo_electronico: req.body.correo_electronico,
+router.post("/vehiculo/actualizar", (req, res) => {
+  actualizarVehiculo(req, res);
+});
+
+const actualizar = (req, res) => {
+  Usuario.findByIdAndUpdate({ _id: req.body._id },
+    {
+      nombre: req.body.nombre,
+      apellido_paterno: req.body.apellido_paterno,
+      apellido_materno: req.body.apellido_materno,
+      correo_electronico: req.body.email,
+      telefono: req.body.tel
+    }, { new: true },
+    (err, doc) => {
+      if (!err) {
+
+        res.redirect('/usuario_lista');
+
+      }
+      else {
+        res.json({ msg: 'Ocurrio un error' });
       }
     });
-    res.json({
-      msg: 'Usuario actualizado',
-      updateUsuario
+};
+
+const actualizarVehiculo = (req, res) => {
+  Vehiculo.findByIdAndUpdate({ _id: req.body._id },
+    {
+      modelo: req.body.modelo,
+      cilindraje: req.body.cilindraje,
+      condicionVehiculo: req.body.condicionVehiculo,
+    }, { new: true },
+    (err, doc) => {
+      if (!err) {
+
+        res.redirect('/vehiculo_lista');
+
+      }
+      else {
+        res.json({ msg: 'Ocurrio un error' });
+      }
     });
-  } catch (error) {
-    res.json({
-      msg: error
-    });
-  }
-});
-
-// Insercion de roles
-// router.post('/', async(req, res) => {
-//     const post = new tipoUsuario({
-//         id: req.body._id,
-//         rol: req.body.rol
-//     });
-
-//     try {
-//         const saveInfo = await post.save();
-//         res.json(saveInfo);
-//     } catch (error) {
-//         res.json({
-//             error
-//         });
-//     }
-// });
-
-// // Consigue el usuario por id
-// router.get('/:id', async(req, res) => {
-//     try {
-//         const getUsuarioId = await Usuario.findById(req.params.id);
-//         res.json({
-//             msg: 'Usuario insertado',
-//             getUsuarioId
-//         });
-//     } catch (error) {
-//         res.json({
-//             msg: error
-//         });
-//     }
-
-// });
+};
 
 
 module.exports = router;

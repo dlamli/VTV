@@ -34,7 +34,6 @@
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js"
     integrity="sha384-JEW9xMcG8R+pH31jmWH6WWP0WintQrMb4s7ZOdauHnUtxwoG2vI5DkLtS3qm9Ekf"
     crossorigin="anonymous"></script>
-
 </head>
 
 <body>
@@ -48,78 +47,48 @@
         <div class="row">
 
           <div class="col-lg-8">
-            <h2 class="portfolio-title">Vehículo</h2>
+            <h2 class="portfolio-title">Venta</h2>
           </div>
+
           <div class="col-lg-4 portfolio-info">
-            {{!-- <h3>Modelo: {{vehiculoDB.modelo}}</h3> --}}
-            {{!-- <li><strong>Color</strong>: {{vehiculoDB.color}}</li>
-            <li><strong>Año del vehículo</strong>: {{vehiculoDB.anho}}</li>
-            <li><strong>Cilindraje</strong>: {{vehiculoDB.cilindraje}}</li>
-            <li><strong>Cantidad de pasajeros</strong>: {{vehiculoDB.cantidadPasajeros}}</li>
-            <li><strong>Condición</strong>: {{vehiculoDB.condicionVehiculo}}</li>
-            <li><strong>Kilometraje</strong>: {{vehiculoDB.kilometraje }}</li> --}}
-            <div class="col-md-8">
-              <label for="validationServer01">Modelo</label>
-              <input name="_id" type="text" value="{{vehiculoDB.modelo}}" class="form-control is-valid"
-                id="validationServer01" type="hidden" disabled>
-              <div class="valid-feedback">
-
-              </div>
-            </div>
-            <div class="col-md-8">
-              <label for="validationServer01">Color</label>
-              <input name="_id" type="text" value="{{vehiculoDB.color}}" class="form-control is-valid"
-                id="validationServer01" type="hidden" disabled>
-              <div class="valid-feedback">
-
-              </div>
-            </div>
-            <div class="col-md-8">
-              <label for="validationServer01">Año</label>
-              <input name="_id" type="text" value="{{vehiculoDB.anho}}" class="form-control is-valid"
-                id="validationServer01" type="hidden" disabled>
-              <div class="valid-feedback">
-
-              </div>
-            </div>
-            <div class="col-md-8">
-              <label for="validationServer01">Cilindraje</label>
-              <input name="_id" type="text" value="{{vehiculoDB.cilindraje}}" class="form-control is-valid"
-                id="validationServer01" type="hidden" disabled>
-              <div class="valid-feedback">
-
-              </div>
-            </div>
-            <div class="col-md-8">
-              <label for="validationServer01">Cantidad de Pasajeros</label>
-              <input name="_id" type="text" value="{{vehiculoDB.cantidadPasajeros}}" class="form-control is-valid"
-                id="validationServer01" type="hidden" disabled>
-              <div class="valid-feedback">
-
-              </div>
-            </div>
-            <div class="col-md-8">
-              <label for="validationServer01">Condición</label>
-              <input name="_id" type="text" value="{{vehiculoDB.condicionVehiculo}}" class="form-control is-valid"
-                id="validationServer01" type="hidden" disabled>
-              <div class="valid-feedback">
-
-              </div>
-            </div>
-            <div class="col-md-8">
-              <label for="validationServer01">Modelo</label>
-              <input name="_id" type="text" value="{{vehiculoDB.kilometraje}}" class="form-control is-valid"
-                id="validationServer01" type="hidden" disabled>
-              <div class="valid-feedback">
-
-              </div>
-            </div>
+            {{!-- <h3>Venta ID: {{ventaDB._id}}</h3>
             <ul>
-            </ul>
-            <p>
-              <strong>Información extra</strong>
-              {{vehiculoDB.extras}}
-            </p>
+              <li><strong>Vehiculo_ID</strong>: {{ventaDB.vehiculo_id}}</li>
+              <li><strong>Cliente_ID</strong>: {{ventaDB.cliente_id}}</li>
+              <li><strong>Precio</strong>: {{ventaDB.precio}}</li>
+            </ul> --}}
+            <div class="col-md-8">
+              <label for="validationServer01">Venta ID</label>
+              <input name="_id" type="text" value="{{ventaDB._id}}" class="form-control is-valid"
+                id="validationServer01" type="hidden" disabled>
+              <div class="valid-feedback">
+
+              </div>
+            </div>
+            <div class="col-md-8">
+              <label for="validationServer01">Vehículo ID</label>
+              <input name="_id" type="text" value="{{ventaDB.vehiculo_id}}" class="form-control is-valid"
+                id="validationServer01" type="hidden" disabled>
+              <div class="valid-feedback">
+
+              </div>
+            </div>
+            <div class="col-md-8">
+              <label for="validationServer01">Cliente_ID</label>
+              <input name="_id" type="text" value="{{ventaDB.cliente_id}}" class="form-control is-valid"
+                id="validationServer01" type="hidden" disabled>
+              <div class="valid-feedback">
+
+              </div>
+            </div>
+            <div class="col-md-8">
+              <label for="validationServer01">Precio</label>
+              <input name="_id" type="text" value="{{ventaDB.precio}}" class="form-control is-valid"
+                id="validationServer01" type="hidden" disabled>
+              <div class="valid-feedback">
+
+              </div>
+            </div>
           </div>
 
         </div>

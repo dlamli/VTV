@@ -3,6 +3,7 @@ const { Router } = require("express"),
   nodemailer = require('nodemailer'),
   router = Router();
 
+const { count } = require("../models/usuario");
 const Usuario = require("../models/usuario"),
   Venta = require('../models/venta'),
   Vehiculo = require('../models/vehiculo');
@@ -30,10 +31,38 @@ let mailOptions = {
 router.get("/", async (req, res) => {
   try {
 
+
     await Vehiculo.find({}, (err, dato) => {
       if (err) { res.json(err) }
+
       else {
-        res.render('index', { vehiculoDB: dato });
+
+        Usuario.countDocuments((err, count) => {
+          if (err) { console.log(err); }
+
+          else {
+
+            Vehiculo.countDocuments((err, countV) => {
+              if (err) { console.log(err); }
+
+              else {
+
+                Venta.countDocuments({ estado: 1 }, (err, countVenta) => {
+                  if (err) { console.log(err); }
+
+                  res.render('index',
+                    {
+                      vehiculoDB: dato,
+                      cantUsuarios: count,
+                      cantVehiculo: countV,
+                      cantVenta: countVenta
+                    });
+
+                })
+              }
+            });
+          }
+        });
       }
     });
 
@@ -71,18 +100,20 @@ router.get("/registrarV", async (req, res) => {
   });
 });
 
-// Detalles Vehiculo
-router.get("/detalles", (req, res) => {
-  res.render("detalles-vehiculo", {});
-});
-
 // Index del usuario
 router.get("/usuario_index", async (req, res) => {
   try {
-    await Venta.find({}, (err, dato) => {
+    await Venta.find({ estado: 1 }, (err, dato) => {
       if (err) { res.json(err) }
       else {
-        res.render('usuario_index', { ventaDB: dato });
+
+        Usuario.find({}, (err, data) => {
+          if (err) { res.json(err) }
+
+          res.render('usuario_index', { ventaDB: dato, usuario: data });
+
+        });
+
       }
     });
   } catch (error) {
@@ -223,17 +254,41 @@ router.post("/registrarV", async (req, res) => {
       img: imgURL
     });
 
-    venta.save();
-    req.session.mensaje = {
-      tipo: 'success',
-      titulo: '|Venta registrado|',
-      error: 'Se registro la venta correctamente'
-    }
-    res.redirect('/usuario_index');
+    Venta.findOne({ vehiculo_id: vehiculoID }, async (err, result) => {
+      if (err) { console.log(err); }
+
+      else if (result) {
+        req.session.mensaje = {
+          tipo: 'danger',
+          titulo: '|Error|',
+          error: 'El modelo del vehiculo está puesta en venta'
+        }
+        res.redirect('/usuario_index');
+      }
+      else {
+        venta.save();
+        req.session.mensaje = {
+          tipo: 'success',
+          titulo: '|Venta registrado|',
+          error: 'Se registro la venta correctamente'
+        }
+
+        res.redirect('/usuario_index');
+
+      }
+
+    });
 
   } catch (error) {
     res.json(error)
   }
 });
+
+const counterUsuario = Usuario.count({}, (err, count) => {
+  if (err) { res.json(err) }
+
+  return count;
+});
+
 
 module.exports = router;

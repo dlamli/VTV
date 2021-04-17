@@ -19,33 +19,25 @@
       <table class="table">
         <thead class="thead-dark">
           <tr>
-            <th scope="col">Nombre</th>
-            <th scope="col">Apellido paterno</th>
-            <th scope="col">Apellido materno</th>
-            <th scope="col">Teléfono</th>
-            <th scope="col">Cédula</th>
-            <th scope="col">Nacionalidad</th>
-            <th scope="col">Correo_Electrónico</th>
-            <th scope="col">Fecha_Creación</th>
+            <th scope="col">Modelo</th>
+            <th scope="col">Año</th>
+            <th scope="col">Color</th>
+            <th scope="col">Condición</th>
+            <th scope="col">kilometraje</th>
           </tr>
         </thead>
-        <hr>
         <tbody>
 
-          {{# each usuarioDB}}
+          {{# each vehiculoDB}}
 
           <tr>
-
-            <td>{{this.nombre}}</td>
-            <td>{{this.apellido_paterno}}</td>
-            <td>{{this.apellido_materno}}</td>
-            <td>{{this.telefono}}</td>
-            <td>{{this.cedula}}</td>
-            <td>{{this.nacionalidad}}</td>
-            <td>{{this.correo_electronico}}</td>
-            <td>{{this.fecha_creacion}}</td>
+            <td>{{this.modelo}}</td>
+            <td>{{this.anho}}</td>
+            <td>{{this.color}}</td>
+            <td>{{this.condicionVehiculo}}</td>
+            <td>{{this.kilometraje}}</td>
             <td>
-              <a href="/usuario/actualizar/{{this._id}}" class="text-decoration-none">
+              <a href="/vehiculo/actualizar/{{this._id}}" class="text-decoration-none">
                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
                   class="bi bi-pencil-square" viewBox="0 0 16 16">
                   <path
@@ -58,8 +50,8 @@
               </a>
             </td>
             <td>
-              <a href="/delete/usuario/{{this._id}}" class="text-decoration-none" aria-hidden="true"
-                onclick="return confirm('Seguro que quiere eliminar este usuario? ');">
+              <a href="/delete/vehiculo/{{this._id}}" class="text-decoration-none" aria-hidden="true"
+                onclick="return confirm('Seguro que quiere eliminar este vehículo? ');">
                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
                   class="bi bi-trash-fill" viewBox="0 0 16 16">
                   <path
@@ -68,9 +60,7 @@
                 </svg>
               </a>
             </td>
-
           </tr>
-
           {{/each}}
 
         </tbody>
