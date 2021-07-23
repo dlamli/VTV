@@ -1,5 +1,5 @@
 # Proyecto VTV
-Este es el proyecto de subasta y venta de vehiculos para el curso de Desarrollo De Aplicaciones Web.
+Este es un proyecto de subasta y venta de vehiculos para el curso de Desarrollo De Aplicaciones Web.
 
 # Requerimientos
 
