@@ -134,7 +134,7 @@ const postLogin = async (req = request, res = response) => {
 
                 if (validarClave) {
 
-                    if (dbUsuario.tipoUsuario == 1) { res.render('api/admin/admin_index'); }
+                    if (dbUsuario.tipoUsuario == 1) { res.render('admin_index'); }
                     else {
                         res.render('usuario_index', {
                             usuario: {
