@@ -3,13 +3,21 @@ const { Router } = require("express"),
   multer = require('multer'),
   router = Router();
 
-const tipoUsuario = require("../models/tipoUsuario"),
-  Usuario = require("../models/usuario"),
-  Vehiculo = require("../models/vehiculo"),
-  Venta = require("../models/venta");
+const {
+  getAdmin,
+  getListaUsuario,
+  getSubasta,
+  postVehiculo,
+  postVehiculoId,
+  deleteUsuario,
+  postRol,
+  postUsuarioId,
+  putUsuario,
+  getVehiculo
+} = require("../controllers/admin.controller");
+
 
 const storage = multer.diskStorage({
-
   // Ruta de destino de img
   destination: function (req, file, cb) {
     cb(null, './public/uploads/images');
@@ -18,6 +26,7 @@ const storage = multer.diskStorage({
   filename: function (req, file, cb) {
     let date = new Date();
     //ruta de acceso img
+    // uploads/images/2021-3-9-asus.jpg
     cb(null, date.getFullYear() + '-' + date.getMonth() + '-' + date.getDate() + '-' + file.originalname);
   }
 
@@ -323,5 +332,10 @@ const actualizarVehiculo = (req, res) => {
     });
 };
 
+// DELETE
+//=====================================================================
+// Delete Usuario por Id
+router.delete('/:id', deleteUsuario);
+//=====================================================================
 
 module.exports = router;

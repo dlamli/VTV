@@ -63,7 +63,9 @@
 .country,
 .contenedor-form input[type="text"],
 .contenedor-form input[type="password"],
-.contenedor-form input[type="email"] {
+.contenedor-form input[type="email"],
+#country,
+#countryHidden {
   outline: none;
   display: block;
   width: 100%;
