@@ -2,12 +2,11 @@
 const express = require("express"),
   hbs = require("hbs"),
   cors = require("cors"),
-  mongoose = require("mongoose"),
   session = require("express-session"),
   cookieParser = require("cookie-parser"),
-  bodyParser = require("body-parser"),
   methodOverride = require('method-override'),
   path = require("path");
+const { conectarMongoAtlas } = require("../db/config");
 
 const usuarioRoutes = require("../routes/usuario.routes"),
   adminRoutes = require("../routes/admin.routes");
@@ -31,26 +30,18 @@ class Server {
   }
 
   connectDB() {
-    console.log("Estableciendo conexion a la base de datos...");
-    mongoose.connect(
-      this.mongoCloudURL,
-      {
-        useNewUrlParser: true,
-        useUnifiedTopology: true,
-        useFindAndModify: false,
-        useCreateIndex: true,
-      })
-      .then(console.log('Conectado en la base de datos'))
-      .catch((err) => console.log(err));
+    conectarMongoAtlas(this.mongoCloudURL)
+      .then(console.log)
+      .catch(console.log);
   }
 
   middlewares() {
     // Cors
     this.app.use(cors());
     // Bodyparser
-    this.app.use(bodyParser.json());
+    this.app.use(express.json());
     // form-urlencoded
-    this.app.use(bodyParser.urlencoded({ extended: false }));
+    this.app.use(express.urlencoded({ extended: false }));
     //Habilitar la carpeta parcials HBS
     hbs.registerPartials(path.resolve(__dirname, "../views/parcials"));
     //Habilitar la carpeta public
@@ -60,7 +51,14 @@ class Server {
     // CookieParser
     this.app.use(cookieParser('secret'));
     //Session
-    this.app.use(session({ cookie: { maxAge: null } }));
+    this.app.use(session({
+      secret: 'keyboard cat',
+      cookie: {
+        maxAge: null
+      },
+      resave: false,
+      saveUninitialized: true,
+    }));
     //Mensaje Flash
     this.app.use((req, res, next) => {
       res.locals.mensaje = req.session.mensaje;

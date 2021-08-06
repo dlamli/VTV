@@ -1,7 +1,7 @@
 {
     "name": "demoproyect",
     "version": "1.0.0",
-    "description": "This is a demoProject using Expresss, SQL Server, REST-Server and more.",
+    "description": "This is a demoProject using Express, SQL Server, REST-Server and more.",
     "main": "index.js",
     "scripts": {
         "start": "node app",

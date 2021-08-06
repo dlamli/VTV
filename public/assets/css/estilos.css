@@ -6,6 +6,12 @@
   box-sizing: border-box;
 }
 
+#video {
+  max-height: 720px;
+  display: block;
+  margin: 0 auto;
+}
+
 .body {
   background: url(../img/fondo.jpg);
   background-size: cover;
@@ -54,7 +60,7 @@
   font-weight: 400;
   line-height: 1;
 }
-
+.country,
 .contenedor-form input[type="text"],
 .contenedor-form input[type="password"],
 .contenedor-form input[type="email"] {
