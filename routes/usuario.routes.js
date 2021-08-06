@@ -57,7 +57,15 @@ router.get("/", async (req, res) => {
 });
 
 // Login
-router.get("/login", getLogin);
+router.get("/login", (req = request, res = response) => {
+  try {
+    res.render("login");
+  } catch (error) {
+    res.json({
+      error
+    })
+  }
+});
 // Ventas
 router.get("/registrarV", async (req, res) => {
   await Vehiculo.find({}, (err, datoVehiculo) => {

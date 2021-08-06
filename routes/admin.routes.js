@@ -3,19 +3,6 @@ const { Router } = require("express"),
   multer = require('multer'),
   router = Router();
 
-const {
-  getAdmin,
-  getListaUsuario,
-  getSubasta,
-  postVehiculo,
-  postVehiculoId,
-  deleteUsuario,
-  postRol,
-  postUsuarioId,
-  putUsuario,
-  getVehiculo
-} = require("../controllers/admin.controller");
-
 
 const storage = multer.diskStorage({
   // Ruta de destino de img
@@ -335,7 +322,19 @@ const actualizarVehiculo = (req, res) => {
 // DELETE
 //=====================================================================
 // Delete Usuario por Id
-router.delete('/:id', deleteUsuario);
+router.delete('/:id', async (req = request, res = response) => {
+  try {
+    const deleteUsuario = await Usuario.remove({ _id: req.params.id });
+    res.json({
+      msg: 'Usuario eliminado',
+      deleteUsuario
+    });
+  } catch (error) {
+    res.json({
+      msg: error
+    });
+  }
+});
 //=====================================================================
 
 module.exports = router;
